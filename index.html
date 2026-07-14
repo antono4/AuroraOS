@@ -2,221 +2,802 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AuroraOS UI Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuroraOS - Custom Android ROM</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --aurora-primary: #8b5cf6;
-            --aurora-secondary: #0ea5e9;
-            --bg-glass: rgba(25, 25, 30, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --aurora-purple: #8b5cf6;
+            --aurora-cyan: #06b6d4;
+            --aurora-pink: #ec407a;
+            --aurora-green: #34a853;
+            --aurora-orange: #f59e0b;
+            --aurora-red: #ea4335;
+            --dark-bg: #0f0c29;
+            --dark-bg-2: #1a0a2e;
+            --dark-bg-3: #24243e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+            background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-bg-2) 50%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Aurora Background Effect */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .aurora-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            animation: auroraFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes auroraFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2%, -2%) rotate(1deg); }
+            50% { transform: translate(-1%, 2%) rotate(-1deg); }
+            75% { transform: translate(1%, 1%) rotate(0.5deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--aurora-purple);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--aurora-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-android {
+            background: rgba(52, 168, 83, 0.2);
+            color: var(--aurora-green);
+            border: 1px solid rgba(52, 168, 83, 0.3);
+        }
+
+        .badge-api {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--aurora-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .badge-license {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--aurora-orange);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hero-image {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
         }
 
-        .device-mockup {
-            width: 360px;
-            height: 760px;
-            background-color: #000;
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
             border-radius: 40px;
-            border: 8px solid #334155;
-            position: relative;
+            border: 4px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
         }
 
-        .camera-hole {
+        .phone-notch {
             position: absolute;
-            top: 15px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 12px;
-            height: 12px;
-            background-color: #050505;
-            border-radius: 50%;
-            z-index: 100;
+            width: 80px;
+            height: 25px;
+            background: #0a0a0f;
+            border-radius: 0 0 15px 15px;
+            z-index: 10;
         }
 
-        .wallpaper {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, #0f0c29 0%, #1a0a2e 30%, #24243e 60%, #0f0c29 100%);
-            background-size: 400% 400%;
-            animation: auroraGradient 8s ease infinite;
-            z-index: 1;
-            overflow: hidden;
+        .phone-status-bar {
+            padding: 35px 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
         }
 
-        /* Aurora/Glow effect layer */
-        .wallpaper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                /* Aurora glow from bottom */
-                radial-gradient(ellipse at 50% 100%, rgba(139, 92, 246, 0.4) 0%, transparent 60%),
-                radial-gradient(ellipse at 30% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
-                /* Top dark overlay */
-                radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
-            animation: auroraGlow 3s ease-in-out infinite alternate;
+        .phone-time {
+            font-weight: 600;
         }
 
-        /* Aurora particles pattern */
-        .wallpaper::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: 
-                /* Warrior silhouette 1 */
-                radial-gradient(ellipse 80px 120px at 15% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 100%),
-                /* Warrior silhouette 2 */
-                radial-gradient(ellipse 100px 140px at 85% 65%, rgba(6, 182, 212, 0.25) 0%, transparent 100%),
-                /* Energy particles */
-                radial-gradient(3px 3px at 10% 20%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(2px 2px at 25% 35%, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(3px 3px at 40% 15%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(2px 2px at 55% 40%, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(3px 3px at 70% 25%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(2px 2px at 85% 45%, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(3px 3px at 95% 30%, rgba(255, 255, 255, 0.8), transparent),
-                /* Sword slash marks */
-                linear-gradient(135deg, transparent 45%, rgba(139, 92, 246, 0.1) 50%, transparent 55%),
-                linear-gradient(-135deg, transparent 45%, rgba(255, 80, 0, 0.1) 50%, transparent 55%);
-            background-size: 100% 100%;
-            animation: auroraMove 6s ease-in-out infinite;
+        .phone-icons {
+            display: flex;
+            gap: 5px;
+            align-items: center;
         }
 
-        /* Aurora OS Logo watermark */
-        .aurora-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
+        .phone-home {
+            padding: 0 15px;
             text-align: center;
-            opacity: 0.15;
+            margin-top: 120px;
         }
 
-        .aurora-logo .logo-text {
-            font-size: 48px;
+        .phone-time-display {
+            font-size: 3rem;
             font-weight: 700;
-            color: #8b5cf6;
-            text-shadow: 0 0 30px rgba(255, 68, 68, 0.8), 0 0 60px rgba(255, 68, 68, 0.4);
-            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .aurora-logo .logo-sub {
-            font-size: 32px;
+        .phone-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .phone-apps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 30px 20px;
+        }
+
+        .phone-app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .phone-app-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .phone-app-name {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+        }
+
+        .phone-dock {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .dock-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--aurora-purple);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
             font-weight: 700;
-            color: #0ea5e9;
-            text-shadow: 0 0 20px rgba(255, 170, 0, 0.8);
-            letter-spacing: 8px;
-            margin-top: -5px;
+            margin-bottom: 1rem;
         }
 
-        /* Fire particles rising */
-        .particles {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            overflow: hidden;
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #8b5cf6, #06b6d4, transparent);
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--aurora-purple);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon.privacy {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--aurora-purple);
+        }
+
+        .feature-icon.performance {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--aurora-cyan);
+        }
+
+        .feature-icon.custom {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--aurora-orange);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Android 17 Features */
+        .android17-section {
+            background: linear-gradient(180deg, rgba(52, 168, 83, 0.1) 0%, transparent 100%);
+        }
+
+        .android17-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .android17-card {
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(52, 168, 83, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .android17-card:hover {
+            border-color: var(--aurora-green);
+            background: rgba(52, 168, 83, 0.1);
+        }
+
+        .android17-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(52, 168, 83, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .android17-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .android17-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Build Steps */
+        .build-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .build-step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .build-step:hover {
+            border-color: var(--aurora-purple);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            animation: auroraRise 8s linear infinite;
-            box-shadow: 0 0 10px #8b5cf6, 0 0 20px #06b6d4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
-        .particle:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 6s; }
-        .particle:nth-child(2) { left: 15%; animation-delay: 1s; animation-duration: 7s; }
-        .particle:nth-child(3) { left: 25%; animation-delay: 0.5s; animation-duration: 5s; }
-        .particle:nth-child(4) { left: 35%; animation-delay: 2s; animation-duration: 8s; }
-        .particle:nth-child(5) { left: 45%; animation-delay: 1.5s; animation-duration: 6s; }
-        .particle:nth-child(6) { left: 55%; animation-delay: 0.8s; animation-duration: 7s; }
-        .particle:nth-child(7) { left: 65%; animation-delay: 2.5s; animation-duration: 5s; }
-        .particle:nth-child(8) { left: 75%; animation-delay: 0.3s; animation-duration: 8s; }
-        .particle:nth-child(9) { left: 85%; animation-delay: 1.8s; animation-duration: 6s; }
-        .particle:nth-child(10) { left: 95%; animation-delay: 2.2s; animation-duration: 7s; }
+        .step-number:nth-child(1) { background: linear-gradient(135deg, var(--aurora-purple), #7c3aed); }
+        .step-number:nth-child(2) { background: linear-gradient(135deg, var(--aurora-cyan), #0891b2); }
+        .step-number:nth-child(3) { background: linear-gradient(135deg, var(--aurora-orange), #d97706); }
+        .step-number:nth-child(4) { background: linear-gradient(135deg, var(--aurora-green), #16a34a); }
 
-        /* Energy orbs */
-        .energy-orb {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 100, 0, 0.8), transparent);
-            animation: orbFloat 10s ease-in-out infinite;
-            box-shadow: 0 0 20px #8b5cf6, 0 0 40px #06b6d4;
+        .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
         }
 
-        .energy-orb:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .energy-orb:nth-child(2) { top: 40%; left: 80%; animation-delay: 2s; width: 15px; height: 15px; }
-        .energy-orb:nth-child(3) { top: 60%; left: 20%; animation-delay: 4s; width: 25px; height: 25px; }
-        .energy-orb:nth-child(4) { top: 30%; left: 60%; animation-delay: 1s; width: 12px; height: 12px; }
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
 
-        /* ==================== LOADING SCREEN ==================== */
-        .loading-screen {
+        .step-code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--aurora-cyan);
+        }
+
+        /* Requirements Grid */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .req-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .req-table {
+            width: 100%;
+        }
+
+        .req-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .req-row:last-child {
+            border-bottom: none;
+        }
+
+        .req-label {
+            color: var(--text-secondary);
+        }
+
+        .req-value {
+            font-weight: 600;
+        }
+
+        .req-value.recommended {
+            color: var(--aurora-green);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-card p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--aurora-purple);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-badges {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .android17-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
             position: fixed;
             inset: 0;
-            background: linear-gradient(180deg, #0f0c29 0%, #1a1a3e 50%, #0f0c29 100%);
-            z-index: 9999;
+            background: var(--dark-bg);
+            z-index: 10000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        .loading-screen.hide {
+        .loading-overlay.hidden {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
 
         .loading-logo {
-            font-size: 48px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: none;
-            letter-spacing: 4px;
-            animation: logoPulse 1.5s ease-in-out infinite;
-            margin-bottom: 5px;
+            margin-bottom: 2rem;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        .loading-logo-sub {
-            font-size: 20px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 12px;
-            margin-bottom: 40px;
-        }
-
-        .loading-bar-container {
+        .loading-bar {
             width: 200px;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
@@ -224,1353 +805,492 @@
             overflow: hidden;
         }
 
-        .loading-bar {
+        .loading-bar::after {
+            content: '';
+            display: block;
+            width: 50%;
             height: 100%;
-            background: linear-gradient(90deg, #8b5cf6, #0ea5e9, #8b5cf6);
-            background-size: 200% 100%;
-            border-radius: 2px;
-            animation: loadingProgress 2.5s ease-in-out forwards, auroraShimmer 1.5s linear infinite;
+            background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-cyan));
+            animation: loading 1s ease-in-out infinite;
         }
 
-        .loading-text {
-            margin-top: 20px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-            animation: textBlink 1s ease-in-out infinite;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .loading-sparks {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
         }
-
-        .spark {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #8b5cf6;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #8b5cf6;
-            animation: sparkFly 1.5s ease-out infinite;
-        }
-
-        .spark:nth-child(1) { left: 30%; top: 50%; animation-delay: 0s; }
-        .spark:nth-child(2) { left: 70%; top: 50%; animation-delay: 0.3s; }
-        .spark:nth-child(3) { left: 50%; top: 40%; animation-delay: 0.6s; }
-        .spark:nth-child(4) { left: 40%; top: 60%; animation-delay: 0.9s; }
-        .spark:nth-child(5) { left: 60%; top: 60%; animation-delay: 1.2s; }
-
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.9; }
-        }
-
-        @keyframes loadingProgress {
-            0% { width: 0%; }
-            20% { width: 20%; }
-            40% { width: 45%; }
-            60% { width: 65%; }
-            80% { width: 85%; }
-            100% { width: 100%; }
-        }
-
-        @keyframes auroraShimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        @keyframes textBlink {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes sparkFly {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(calc((var(--tx, 0.5) - 0.5) * 200px), calc((var(--ty, 0.5) - 0.5) * -200px)) scale(0); opacity: 0; }
-        }
-
-        @keyframes auroraGradient {
-            0% { background-position: 0% 50%; filter: brightness(1); }
-            50% { background-position: 100% 50%; filter: brightness(1.1); }
-            100% { background-position: 0% 50%; filter: brightness(1); }
-        }
-
-        @keyframes auroraGlow {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes auroraMove {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-        }
-
-        @keyframes auroraRise {
-            0% { 
-                transform: translateY(800px) scale(1); 
-                opacity: 0; 
-            }
-            10% { opacity: 1; }
-            90% { opacity: 0.8; }
-            100% { 
-                transform: translateY(-100px) scale(0.3); 
-                opacity: 0; 
-            }
-        }
-
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-            25% { transform: translate(10px, -20px) scale(1.2); opacity: 1; }
-            50% { transform: translate(-5px, -40px) scale(0.8); opacity: 0.8; }
-            75% { transform: translate(15px, -20px) scale(1.1); opacity: 0.9; }
-        }
-
-        .system-ui {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Status Bar */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 15px 5px;
-            font-size: 12px;
-            font-weight: 500;
-            position: relative;
-        }
-        
-        .status-bar::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 4px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 2px;
-        }
-
-        .status-icons {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
-
-        /* Home Content */
-        .home-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 0 15px;
-        }
-
-        .time-display {
-            text-align: center;
-            padding: 40px 0 10px;
-        }
-
-        .main-time {
-            font-size: 72px;
-            font-weight: 300;
-            letter-spacing: -2px;
-        }
-
-        .main-date {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-
-        /* App Grid */
-        .app-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 30px 10px;
-            max-width: 320px;
-            margin: 0 auto;
-        }
-
-        .app-icon {
-            width: 55px;
-            height: 70px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .app-icon:active { transform: scale(0.9); }
-
-        .app-icon-img {
-            width: 55px;
-            height: 55px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .app-icon-label {
-            font-size: 11px;
-            text-align: center;
-            max-width: 60px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        /* Navigation Bar */
-        .nav-bar {
-            height: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-bottom: 10px;
-        }
-
-        .nav-indicator {
-            width: 40px;
-            height: 4px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 2px;
-        }
-
-        /* Quick Settings */
-        .qs-panel {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 10px 15px;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-            z-index: 200;
-        }
-
-        .qs-panel.active { transform: translateY(0); }
-
-        .qs-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .qs-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .qs-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        .qs-tile {
-            aspect-ratio: 1;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .qs-tile:active { transform: scale(0.95); }
-        .qs-tile.active { background: var(--aurora-primary); }
-
-        .qs-tile i { font-size: 20px; }
-        .qs-tile span { font-size: 10px; }
-
-        /* App Screen Base */
-        .app-screen {
-            position: absolute;
-            inset: 0;
-            background: #1a1a2e;
-            z-index: 50;
-            display: none;
-            flex-direction: column;
-        }
-
-        .app-header {
-            padding: 25px 15px 10px;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .app-nav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .app-back {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .app-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .app-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-        }
-
-        /* Phone App */
-        .phone-display {
-            text-align: center;
-            font-size: 32px;
-            padding: 20px;
-            min-height: 80px;
-        }
-
-        .phone-keypad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 280px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .phone-btn {
-            aspect-ratio: 1.5;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .phone-btn:active { background: rgba(255,255,255,0.2); }
-        .phone-btn span { font-size: 10px; opacity: 0.6; }
-
-        .call-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            margin: 15px auto;
-        }
-
-        .call-btn.green { background: #22c55e; color: white; }
-        .call-btn.red { background: #ef4444; color: white; }
-
-        /* Messages App */
-        .chat-list { display: flex; flex-direction: column; gap: 10px; }
-
-        .chat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.05);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .chat-item:hover { background: rgba(255,255,255,0.1); }
-
-        .chat-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--aurora-primary), var(--aurora-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .chat-info { flex: 1; }
-        .chat-name { font-weight: 600; margin-bottom: 3px; }
-        .chat-preview { font-size: 13px; opacity: 0.7; }
-
-        .chat-meta { text-align: right; font-size: 11px; opacity: 0.6; }
-        .chat-badge {
-            background: #22c55e;
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            margin-top: 5px;
-            display: inline-block;
-        }
-
-        /* Settings App */
-        .settings-section { display: flex; flex-direction: column; gap: 8px; }
-
-        .settings-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.05);
-            cursor: pointer;
-        }
-
-        .settings-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white;
-        }
-
-        .settings-info { flex: 1; }
-        .settings-title { font-weight: 600; font-size: 15px; }
-        .settings-subtitle { font-size: 12px; opacity: 0.6; margin-top: 2px; }
-
-        /* Toggle Switch */
-        .toggle {
-            width: 50px;
-            height: 28px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 14px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .toggle.active { background: var(--aurora-primary); }
-
-        .toggle::after {
-            content: '';
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background: white;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-            transition: transform 0.3s;
-        }
-
-        .toggle.active::after { transform: translateX(22px); }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 14px;
-            z-index: 9999;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-
-        .demo-hint i { margin-right: 8px; }
     </style>
 </head>
 <body>
-
-<!-- Loading Screen -->
-<div class="loading-screen" id="loading-screen">
-    <div class="loading-sparks">
-        <div class="spark"></div>
-        <div class="spark"></div>
-        <div class="spark"></div>
-        <div class="spark"></div>
-        <div class="spark"></div>
-    </div>
-    <div class="loading-logo">AURORA OS</div>
-    <div class="loading-logo-sub">CUSTOM ROM</div>
-    <div class="loading-bar-container">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-logo">AURORA OS</div>
         <div class="loading-bar"></div>
     </div>
-    <div class="loading-text">Loading AuroraOS...</div>
-</div>
 
-    <div class="device-mockup" id="device">
-    <div class="camera-hole"></div>
-    <div class="wallpaper">
-        <!-- Aurora OS Logo Watermark -->
-        <div class="aurora-logo">
-            <div class="logo-text">AURORA OS</div>
-            <div class="logo-sub">CUSTOM ROM</div>
-        </div>
-        <!-- Aurora Particles -->
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-        <!-- Energy Orbs -->
-        <div class="energy-orb"></div>
-        <div class="energy-orb"></div>
-        <div class="energy-orb"></div>
-        <div class="energy-orb"></div>
-    </div>
+    <!-- Aurora Background -->
+    <div class="aurora-bg"></div>
 
-    <!-- System UI -->
-    <div class="system-ui">
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <span id="status-time">12:00</span>
-            <div class="status-icons">
-                <i class="fa-solid fa-plane"></i>
-                <i class="fa-solid fa-wifi"></i>
-                <span>85%</span>
-                <i class="fa-solid fa-battery-three-quarters"></i>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-icon">🌟</div>
+                <span>AuroraOS</span>
             </div>
+            <ul class="nav-links">
+                <li><a href="#fitur">Fitur</a></li>
+                <li><a href="#android17">Android 17</a></li>
+                <li><a href="#build">Build</a></li>
+                <li><a href="#prasyarat">Prasyarat</a></li>
+            </ul>
+            <a href="https://github.com/antono4/AuroraOS" class="btn btn-primary" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
         </div>
+    </nav>
 
-        <!-- Home Content -->
-        <div class="home-content">
-            <div class="time-display">
-                <div class="main-time" id="main-time">12:00</div>
-                <div class="main-date" id="main-date">Sel, 14 Jul</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Custom Android ROM <span>AuroraOS</span></h1>
+                <p>Sistem operasi Android kustom berbasis NusantaraProject dengan foundation Android 17 (API 37). Dirancang untuk pengalaman pengguna yang superior.</p>
+                
+                <div class="hero-badges">
+                    <span class="badge badge-android">
+                        <i class="fab fa-android"></i> Android 17
+                    </span>
+                    <span class="badge badge-api">
+                        <i class="fas fa-code"></i> API 37
+                    </span>
+                    <span class="badge badge-license">
+                        <i class="fas fa-file-alt"></i> MIT License
+                    </span>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#build" class="btn btn-primary">Mulai Build</a>
+                    <a href="#fitur" class="btn btn-secondary">Pelajari Lebih</a>
+                </div>
             </div>
 
-            <!-- App Grid -->
-            <div class="app-grid">
-                <div class="app-icon" onclick="openApp('weather')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
-                        <i class="fa-solid fa-cloud-sun"></i>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-status-bar">
+                        <span class="phone-time">09:41</span>
+                        <div class="phone-icons">
+                            <span>📶</span>
+                            <span>🔋 87%</span>
+                        </div>
                     </div>
-                    <span class="app-icon-label">Cuaca</span>
-                </div>
-                <div class="app-icon" onclick="openApp('telepon')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
-                        <i class="fa-solid fa-phone"></i>
+                    <div class="phone-home">
+                        <div class="phone-time-display">09:41</div>
+                        <div class="phone-date">Senin, 14 Juli 2025</div>
                     </div>
-                    <span class="app-icon-label">Telepon</span>
-                </div>
-                <div class="app-icon" onclick="openApp('pesan')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
-                        <i class="fa-brands fa-whatsapp"></i>
+                    <div class="phone-apps">
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #4285f4;">📞</div>
+                            <span class="phone-app-name">Telepon</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #34a853;">💬</div>
+                            <span class="phone-app-name">Pesan</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #ea4335;">🌐</div>
+                            <span class="phone-app-name">Chrome</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #f59e0b;">📷</div>
+                            <span class="phone-app-name">Kamera</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #8b5cf6;">⚙️</div>
+                            <span class="phone-app-name">Pengaturan</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #e91e63;">🖼️</div>
+                            <span class="phone-app-name">Galeri</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #009688;">📁</div>
+                            <span class="phone-app-name">File</span>
+                        </div>
+                        <div class="phone-app">
+                            <div class="phone-app-icon" style="background: #ff5722;">▶️</div>
+                            <span class="phone-app-name">YouTube</span>
+                        </div>
                     </div>
-                    <span class="app-icon-label">Pesan</span>
-                </div>
-                <div class="app-icon" onclick="openApp('chrome')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
-                        <i class="fa-brands fa-chrome"></i>
-                    </div>
-                    <span class="app-icon-label">Chrome</span>
-                </div>
-                <div class="app-icon" onclick="openApp('recorder')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
-                        <i class="fa-solid fa-video"></i>
-                    </div>
-                    <span class="app-icon-label">Recorder</span>
-                </div>
-                <div class="app-icon" onclick="openApp('kamera')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">
-                        <i class="fa-solid fa-camera"></i>
-                    </div>
-                    <span class="app-icon-label">Kamera</span>
-                </div>
-                <div class="app-icon" onclick="openApp('privacy')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #10b981, #059669);">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <span class="app-icon-label">Pengaturan</span>
-                </div>
-                <div class="app-icon" onclick="openApp('health')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <span class="app-icon-label">Galeri</span>
-                </div>
-                <div class="app-icon" onclick="openApp('smarthome')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
-                        <i class="fa-brands fa-home"></i>
-                    </div>
-                    <span class="app-icon-label">YouTube</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation Bar -->
-        <div class="nav-bar">
-            <div class="nav-indicator"></div>
-        </div>
-    </div>
-
-    <!-- Quick Settings Panel -->
-    <div class="qs-panel" id="qs-panel">
-        <div class="qs-header">
-            <span class="qs-title">Quick Settings</span>
-            <button class="app-back" onclick="toggleQS(false)"><i class="fa-solid fa-caret-down"></i></button>
-        </div>
-        <div class="qs-grid">
-            <div class="qs-tile active" onclick="toggleTile(this)">
-                <i class="fa-solid fa-wifi"></i>
-                <span>Wi-Fi</span>
-            </div>
-            <div class="qs-tile active" onclick="toggleTile(this)">
-                <i class="fa-brands fa-bluetooth-b"></i>
-                <span>Bluetooth</span>
-            </div>
-            <div class="qs-tile" onclick="toggleTile(this)">
-                <i class="fa-solid fa-moon"></i>
-                <span>Mode Gelap</span>
-            </div>
-            <div class="qs-tile" onclick="toggleTile(this)">
-                <i class="fa-solid fa-plane"></i>
-                <span>Pesawat</span>
-            </div>
-            <div class="qs-tile" onclick="toggleTile(this)">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Lokasi</span>
-            </div>
-            <div class="qs-tile active" onclick="toggleTile(this)">
-                <i class="fa-solid fa-battery-full"></i>
-                <span>Baterai</span>
-            </div>
-            <div class="qs-tile" onclick="toggleTile(this)">
-                <i class="fa-solid fa-bolt"></i>
-                <span>Hotspot</span>
-            </div>
-            <div class="qs-tile" onclick="toggleTile(this)">
-                <i class="fa-solid fa-flashlight"></i>
-                <span>Senter</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== AURORA OS APP ==================== -->
-    <div class="app-screen" id="app-mobilelegends">
-        <div class="app-header" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('mobilelegends')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Aurora OS</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="text-align: center; padding: 30px 0;">
-                <div style="font-size: 80px; margin-bottom: 15px;">✨</div>
-                <h2 style="font-size: 24px; color: #8b5cf6; margin-bottom: 5px;">Aurora OS</h2>
-                <p style="opacity: 0.7;">Custom ROM v2.0</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="font-weight: 600;">Info Sistem</span>
-                </div>
-                <div style="font-size: 13px; opacity: 0.7;">Android 14</div>
-                <div style="font-size: 13px; opacity: 0.7;">Security Patch: Jul 2024</div>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 24px;">🚀</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Performa</div>
-                    <div style="font-weight: 600; color: #22c55e;">Optimal</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 24px;">🔋</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Baterai</div>
-                    <div style="font-weight: 600;">85%</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 24px;">💾</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Penyimpanan</div>
-                    <div style="font-weight: 600;">128GB</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 24px;">📶</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Sinyal</div>
-                    <div style="font-weight: 600;">Excellent</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== SCREEN RECORDER APP ==================== -->
-    <div class="app-screen" id="app-recorder">
-        <div class="app-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('recorder')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Screen Recorder</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="background: #000; border-radius: 20px; aspect-ratio: 9/16; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                <div style="text-align: center;">
-                    <div style="font-size: 60px; opacity: 0.3;">⏺️</div>
-                    <div style="font-size: 32px; margin-top: 10px; font-weight: 300;">00:00</div>
-                </div>
-            </div>
-            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-                <button style="width: 70px; height: 70px; border-radius: 50%; background: #ef4444; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 25px; height: 25px; background: white; border-radius: 50%;"></div>
-                </button>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <div><div style="font-size: 14px;">Rekam audio</div><div style="font-size: 11px; opacity: 0.6;">Dengan mikrofon</div></div>
-                    <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
-                    <div><div style="font-size: 14px;">Kualitas video</div><div style="font-size: 11px; opacity: 0.6;">1080p Full HD</div></div>
-                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== PRIVACY DASHBOARD ==================== -->
-    <div class="app-screen" id="app-privacy">
-        <div class="app-header" style="background: linear-gradient(135deg, #10b981, #059669);">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('privacy')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Privasi</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="text-align: center; padding: 20px 0;">
-                <div style="font-size: 50px; margin-bottom: 10px;">🔒</div>
-                <h2 style="font-size: 20px;">Privacy Dashboard</h2>
-                <p style="font-size: 13px; opacity: 0.7;">Pantau penggunaan sensor</p>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;">
-                    <div style="width: 40px; height: 40px; background: #22c55e; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;"><i class="fa-solid fa-camera"></i></div>
-                    <div style="font-size: 11px; opacity: 0.6;">Kamera</div>
-                    <div style="font-size: 20px; font-weight: 600;">2</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;">
-                    <div style="width: 40px; height: 40px; background: #ef4444; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;"><i class="fa-solid fa-microphone"></i></div>
-                    <div style="font-size: 11px; opacity: 0.6;">Mikrofon</div>
-                    <div style="font-size: 20px; font-weight: 600;">5</div>
-                </div>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
-                <h3 style="margin-bottom: 15px;">Akses Terkini</h3>
-                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-whatsapp"></i></div>
-                    <div style="flex: 1;"><div style="font-weight: 600;">WhatsApp</div><div style="font-size: 11px; opacity: 0.6;">Mikrofon • 5 menit lalu</div></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
-                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-chrome"></i></div>
-                    <div style="flex: 1;"><div style="font-weight: 600;">Chrome</div><div style="font-size: 11px; opacity: 0.6;">Kamera • 1 jam lalu</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== WEATHER APP ==================== -->
-    <div class="app-screen" id="app-weather">
-        <div class="app-header" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('weather')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Cuaca</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="background: linear-gradient(180deg, #3b82f6, #1e40af); border-radius: 25px; padding: 25px; text-align: center; margin-bottom: 15px;">
-                <div style="font-size: 80px; margin-bottom: 10px;">☀️</div>
-                <div style="font-size: 72px; font-weight: 200;">28°</div>
-                <div style="font-size: 16px; opacity: 0.9;">Cerah</div>
-                <div style="font-size: 13px; opacity: 0.7; margin-top: 10px;">Jakarta • Sekarang</div>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;">
-                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">06:00</div><div style="font-size: 24px; margin: 5px 0;">🌤️</div><div style="font-size: 13px;">26°</div></div>
-                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">09:00</div><div style="font-size: 24px; margin: 5px 0;">☀️</div><div style="font-size: 13px;">29°</div></div>
-                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">12:00</div><div style="font-size: 24px; margin: 5px 0;">🌞</div><div style="font-size: 13px;">32°</div></div>
-                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">15:00</div><div style="font-size: 24px; margin: 5px 0;">⛅</div><div style="font-size: 13px;">31°</div></div>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span style="font-weight: 600;">Detail</span></div>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-wind" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Angin</div><div style="font-size: 13px;">12 km/j</div></div></div>
-                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-tint" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Kelembaban</div><div style="font-size: 13px;">65%</div></div></div>
-                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-eye" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Visibilitas</div><div style="font-size: 13px;">10 km</div></div></div>
-                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-compress-alt" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Tekanan</div><div style="font-size: 13px;">1012 hPa</div></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== HEALTH CONNECT ==================== -->
-    <div class="app-screen" id="app-health">
-        <div class="app-header" style="background: linear-gradient(135deg, #ec4899, #db2777);">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('health')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Health</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="text-align: center; padding: 15px 0;">
-                <div style="font-size: 50px; margin-bottom: 10px;">❤️</div>
-                <div style="font-size: 36px; font-weight: 600; color: #ec4899;">8,432</div>
-                <div style="font-size: 13px; opacity: 0.7;">Langkah hari ini</div>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">🔥</div><div style="font-size: 18px; font-weight: 600;">342</div><div style="font-size: 10px; opacity: 0.6;">Kalori</div></div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">⏱️</div><div style="font-size: 18px; font-weight: 600;">45m</div><div style="font-size: 10px; opacity: 0.6;">Aktif</div></div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">💤</div><div style="font-size: 18px; font-weight: 600;">7h</div><div style="font-size: 10px; opacity: 0.6;">Tidur</div></div>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
-                <h3 style="margin-bottom: 15px;">Aktivitas</h3>
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 5px; height: 80px;">
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 60%;"></div><div style="font-size: 10px; margin-top: 5px;">Sen</div></div>
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 80%;"></div><div style="font-size: 10px; margin-top: 5px;">Sel</div></div>
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 50%;"></div><div style="font-size: 10px; margin-top: 5px;">Rab</div></div>
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 70%;"></div><div style="font-size: 10px; margin-top: 5px;">Kam</div></div>
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 90%;"></div><div style="font-size: 10px; margin-top: 5px;">Jum</div></div>
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.8); border-radius: 4px; height: 100%;"></div><div style="font-size: 10px; margin-top: 5px;">Sab</div></div>
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.4); border-radius: 4px; height: 40%;"></div><div style="font-size: 10px; margin-top: 5px;">Min</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== SMART HOME ==================== -->
-    <div class="app-screen" id="app-smarthome">
-        <div class="app-header" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('smarthome')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Smart Home</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
-                <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.3)); border-radius: 20px; padding: 20px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">💡</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
-                    <div style="font-weight: 600;">Lampu Ruang</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Nyala</div>
-                </div>
-                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(79, 70, 229, 0.3)); border-radius: 20px; padding: 20px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">❄️</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
-                    <div style="font-weight: 600;">AC Kamar</div>
-                    <div style="font-size: 12px; opacity: 0.7;">24°C</div>
-                </div>
-                <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3)); border-radius: 20px; padding: 20px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">📺</span><div class="toggle" onclick="this.classList.toggle('active')"></div></div>
-                    <div style="font-weight: 600;">Smart TV</div>
-                    <div style="font-size: 12px; opacity: 0.7;">Mati</div>
-                </div>
-                <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3)); border-radius: 20px; padding: 20px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">🔌</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
-                    <div style="font-weight: 600;">Stop Kontak</div>
-                    <div style="font-size: 12px; opacity: 0.7;">3 aktif</div>
-                </div>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
-                <h3 style="margin-bottom: 15px;">Rutinitas</h3>
-                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(14, 165, 233, 0.15); border-radius: 12px; margin-bottom: 10px;">
-                    <span style="font-size: 24px;">🌅</span>
-                    <div style="flex: 1;"><div style="font-weight: 600;">Pagi Hari</div><div style="font-size: 11px; opacity: 0.6;">06:00</div></div>
-                    <div class="toggle active"></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(251, 146, 60, 0.15); border-radius: 12px;">
-                    <span style="font-size: 24px;">🌙</span>
-                    <div style="flex: 1;"><div style="font-weight: 600;">Tidur</div><div style="font-size: 11px; opacity: 0.6;">23:00</div></div>
-                    <div class="toggle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== TELEPON APP ==================== -->
-    <div class="app-screen" id="app-telepon">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('telepon')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Telepon</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div class="phone-display" id="phone-display">+62</div>
-            <div class="phone-keypad">
-                <button class="phone-btn" onclick="phoneInput('1')">1</button>
-                <button class="phone-btn" onclick="phoneInput('2')">2<span>ABC</span></button>
-                <button class="phone-btn" onclick="phoneInput('3')">3<span>DEF</span></button>
-                <button class="phone-btn" onclick="phoneInput('4')">4<span>GHI</span></button>
-                <button class="phone-btn" onclick="phoneInput('5')">5<span>JKL</span></button>
-                <button class="phone-btn" onclick="phoneInput('6')">6<span>MNO</span></button>
-                <button class="phone-btn" onclick="phoneInput('7')">7<span>PQRS</span></button>
-                <button class="phone-btn" onclick="phoneInput('8')">8<span>TUV</span></button>
-                <button class="phone-btn" onclick="phoneInput('9')">9<span>WXYZ</span></button>
-                <button class="phone-btn" onclick="phoneInput('*')">*</button>
-                <button class="phone-btn" onclick="phoneInput('0')">0<span>+</span></button>
-                <button class="phone-btn" onclick="phoneInput('#')">#</button>
-            </div>
-            <button class="call-btn green" onclick="makeCall()"><i class="fa-solid fa-phone"></i></button>
-        </div>
-    </div>
-
-    <!-- ==================== PESAN APP ==================== -->
-    <div class="app-screen" id="app-pesan">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('pesan')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Pesan</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div class="chat-list">
-                <div class="chat-item">
-                    <div class="chat-avatar"><i class="fa-solid fa-user"></i></div>
-                    <div class="chat-info">
-                        <div class="chat-name">Rizky Developer</div>
-                        <div class="chat-preview">Build AuroraOS-nya berhasil! 🔥</div>
-                    </div>
-                    <div class="chat-meta">
-                        <div>14:30</div>
-                        <span class="chat-badge">2</span>
-                    </div>
-                </div>
-                <div class="chat-item">
-                    <div class="chat-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);"><i class="fa-brands fa-whatsapp"></i></div>
-                    <div class="chat-info">
-                        <div class="chat-name">Grup Developer ID</div>
-                        <div class="chat-preview">Alex: Kapan ROM baru?</div>
-                    </div>
-                    <div class="chat-meta">
-                        <div>Kemarin</div>
-                    </div>
-                </div>
-                <div class="chat-item">
-                    <div class="chat-avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"><i class="fa-brands fa-telegram"></i></div>
-                    <div class="chat-info">
-                        <div class="chat-name">Channel AuroraOS</div>
-                        <div class="chat-preview">AuroraOS v2.0 Beta tersedia!</div>
-                    </div>
-                    <div class="chat-meta">
-                        <div>13:45</div>
-                        <span class="chat-badge">5</span>
+                    <div class="phone-dock">
+                        <div class="dock-icon" style="background: var(--aurora-purple);">🏠</div>
+                        <div class="dock-icon">📱</div>
+                        <div class="dock-icon">🔙</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ==================== CHROME APP ==================== -->
-    <div class="app-screen" id="app-chrome">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('chrome')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Chrome</span>
+    <!-- Features Section -->
+    <section id="fitur">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">✨ Fitur Utama</span>
+                <h2 class="section-title">Keunggulan AuroraOS</h2>
+                <p class="section-subtitle">Dirancang untuk memberikan pengalaman Android murni yang dioptimalkan dengan fitur-fitur canggih</p>
             </div>
-        </div>
-        <div class="app-content">
-            <div style="background: rgba(255,255,255,0.1); border-radius: 25px; padding: 12px 20px; margin-bottom: 20px;">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span style="margin-left: 10px; opacity: 0.7;">Cari atau ketik URL</span>
-            </div>
-            <div style="text-align: center; padding: 40px;">
-                <div style="font-size: 60px; margin-bottom: 20px;">🌐</div>
-                <h2 style="font-size: 24px; margin-bottom: 10px;">AuroraOS</h2>
-                <p style="opacity: 0.7;">Custom ROM Android Indonesia</p>
-                <p style="opacity: 0.5; margin-top: 20px; font-size: 14px;">API 37 • Android 17</p>
-            </div>
-        </div>
-    </div>
 
-    <!-- ==================== KAMERA APP ==================== -->
-    <div class="app-screen" id="app-kamera">
-        <div class="app-header" style="background: transparent;">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('kamera')" style="color: white;"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title" style="color: white;">Kamera</span>
-            </div>
-        </div>
-        <div class="app-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a1a2e, #2d1f4e);">
-            <div style="width: 100%; aspect-ratio: 9/16; max-height: 400px; background: #000; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
-                <i class="fa-solid fa-camera" style="font-size: 80px; opacity: 0.3;"></i>
-            </div>
-            <div style="display: flex; gap: 20px; align-items: center;">
-                <div style="width: 50px; height: 50px; border-radius: 50%; border: 3px solid white;"></div>
-                <button style="width: 70px; height: 70px; border-radius: 50%; background: white; border: none; cursor: pointer;" onclick="capturePhoto()"></button>
-                <div style="width: 50px; height: 50px; border-radius: 10px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
-                    <i class="fa-solid fa-heart" style="font-size: 20px;"></i>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon privacy">🔒</div>
+                    <h3>Privasi Terdepan</h3>
+                    <p>Fitur privasi enhanced dengan kontrol penuh atas data Anda. Privacy Dashboard, Photo Picker, dan Private Space.</p>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ==================== PENGATURAN APP ==================== -->
-    <div class="app-screen" id="app-pengaturan">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('pengaturan')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Pengaturan</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div class="settings-section">
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: var(--aurora-primary);"><i class="fa-solid fa-user"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Aurora User</div>
-                        <div class="settings-subtitle">aurora@device.com</div>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon performance">⚡</div>
+                    <h3>Performa Optimal</h3>
+                    <p>Optimasi sistem untuk responsivitas dan efisiensi baterai. Memory management dan VM tuning.</p>
                 </div>
-                <div class="settings-item" onclick="toggleSetting('wifi')">
-                    <div class="settings-icon" style="background: #3b82f6;"><i class="fa-solid fa-wifi"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Wi-Fi</div>
-                        <div class="settings-subtitle">Terhubung ke Aurora_5G</div>
-                    </div>
-                    <div class="toggle active" id="toggle-wifi"></div>
-                </div>
-                <div class="settings-item" onclick="toggleSetting('bluetooth')">
-                    <div class="settings-icon" style="background: #22c55e;"><i class="fa-brands fa-bluetooth-b"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Bluetooth</div>
-                        <div class="settings-subtitle">Earbuds Pro</div>
-                    </div>
-                    <div class="toggle active"></div>
-                </div>
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-mobile-screen"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Data Seluler</div>
-                        <div class="settings-subtitle">5G - 2.3 GB digunakan</div>
-                    </div>
-                    <div class="toggle active"></div>
-                </div>
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: #8b5cf6;"><i class="fa-solid fa-palette"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Tema</div>
-                        <div class="settings-subtitle">Aurora Dark</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
-                </div>
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: #06b6d4;"><i class="fa-solid fa-wallpaper"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Wallpaper</div>
-                        <div class="settings-subtitle">Aurora Gradient</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ==================== GALERI APP ==================== -->
-    <div class="app-screen" id="app-galeri">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('galeri')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Galeri</span>
-            </div>
-        </div>
-        <div class="app-content">
-            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-                <span style="font-weight: 600; border-bottom: 2px solid var(--aurora-primary); padding-bottom: 5px;">Foto</span>
-                <span style="opacity: 0.5;">Video</span>
-                <span style="opacity: 0.5;">Album</span>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;">
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #a78bfa, #38bdf8); border-radius: 5px;"></div>
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 5px;"></div>
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #a855f7, #ec4899); border-radius: 5px;"></div>
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 5px;"></div>
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #00d9a5, #4f8fff); border-radius: 5px;"></div>
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #818cf8, #22d3ee); border-radius: 5px;"></div>
-            </div>
-        </div>
-    </div>
+                <div class="feature-card">
+                    <div class="feature-icon custom">🎨</div>
+                    <h3>Kustomisasi Luas</h3>
+                    <p>Beragam opsi kustomisasi untuk personalisasi penuh. Dark Mode, Accent Color, dan Custom Fonts.</p>
+                </div>
 
-    <!-- ==================== FILES APP ==================== -->
-    <div class="app-screen" id="app-files">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('files')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Files</span>
-                <span style="margin-left: auto; font-size: 12px; opacity: 0.6;">89GB / 128GB</span>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(52, 168, 83, 0.2); color: var(--aurora-green);">🌏</div>
+                    <h3>Multi-Bahasa</h3>
+                    <p>Dukungan Bahasa Indonesia dan 50+ bahasa lainnya secara native.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(234, 67, 53, 0.2); color: var(--aurora-red);">🔄</div>
+                    <h3>Update Cepat</h3>
+                    <p>Mendapat update keamanan secara berkala langsung dari tim developer.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: rgba(245, 158, 11, 0.2); color: var(--aurora-orange);">🇮🇩</div>
+                    <h3>Made in Indonesia</h3>
+                    <p>Didesain khusus untuk pengguna Indonesia dengan dukungan komunitas lokal.</p>
+                </div>
             </div>
         </div>
-        <div class="app-content">
-            <div class="settings-section">
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-folder"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">DCIM</div>
-                        <div class="settings-subtitle">6 item</div>
+    </section>
+
+    <!-- Android 17 Section -->
+    <section id="android17" class="android17-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">📦 Android 17</span>
+                <h2 class="section-title">Fitur Android 17 (API 37)</h2>
+                <p class="section-subtitle">Android 17 membawa banyak fitur baru yang kami integrasikan ke AuroraOS</p>
+            </div>
+
+            <div class="android17-grid">
+                <div class="android17-card">
+                    <div class="android17-icon">🔐</div>
+                    <div class="android17-content">
+                        <h4>Private Space</h4>
+                        <p>Area tersembunyi untuk aplikasi sensitif</p>
                     </div>
                 </div>
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-folder"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Downloads</div>
-                        <div class="settings-subtitle">12 item - 256 MB</div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">🖼️</div>
+                    <div class="android17-content">
+                        <h4>Photo Picker V2</h4>
+                        <p>Pilih foto tanpa berikan akses penuh ke galeri</p>
                     </div>
                 </div>
-                <div class="settings-item">
-                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-folder"></i></div>
-                    <div class="settings-info">
-                        <div class="settings-title">Documents</div>
-                        <div class="settings-subtitle">3 item - 12 MB</div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">🛡️</div>
+                    <div class="android17-content">
+                        <h4>Block Cleartext</h4>
+                        <p>HTTP traffic diblokir kecuali dikonfigurasi</p>
+                    </div>
+                </div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">📺</div>
+                    <div class="android17-content">
+                        <h4>Edge-to-Edge Display</h4>
+                        <p>Tampilan penuh tanpa batas layar</p>
+                    </div>
+                </div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">📱</div>
+                    <div class="android17-content">
+                        <h4>Resizable Apps</h4>
+                        <p>Optimized untuk tablet dan foldable devices</p>
+                    </div>
+                </div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">📡</div>
+                    <div class="android17-content">
+                        <h4>Wi-Fi 7 Ready</h4>
+                        <p>Next-generation Wi-Fi support</p>
+                    </div>
+                </div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">🎵</div>
+                    <div class="android17-content">
+                        <h4>Media3 Effects</h4>
+                        <p>On-device AI video processing</p>
+                    </div>
+                </div>
+
+                <div class="android17-card">
+                    <div class="android17-icon">🤖</div>
+                    <div class="android17-content">
+                        <h4>App Functions</h4>
+                        <p>AI-powered app interactions</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ==================== YOUTUBE APP ==================== -->
-    <div class="app-screen" id="app-youtube">
-        <div class="app-header">
-            <div class="app-nav">
-                <button class="app-back" onclick="closeApp('youtube')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">YouTube</span>
+    <!-- Build Steps Section -->
+    <section id="build">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">🔨 Langkah Build</span>
+                <h2 class="section-title">Cara Build AuroraOS</h2>
+                <p class="section-subtitle">Ikuti langkah-langkah berikut untuk membangun AuroraOS dari source code</p>
+            </div>
+
+            <div class="build-steps">
+                <div class="build-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Setup Environment</h4>
+                        <p>Install dependencies dan configure build tools</p>
+                        <code class="step-code">./scripts/setup.sh</code>
+                    </div>
+                </div>
+
+                <div class="build-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Sync Source</h4>
+                        <p>Download AOSP + NusantaraProject repositories</p>
+                        <code class="step-code">repo sync</code>
+                    </div>
+                </div>
+
+                <div class="build-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Customize</h4>
+                        <p>Kustomisasi branding, wallpaper, dan fitur</p>
+                        <code class="step-code">./scripts/customize.sh</code>
+                    </div>
+                </div>
+
+                <div class="build-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Build ROM</h4>
+                        <p>Compile source code ke flashable ZIP</p>
+                        <code class="step-code">mka -j$(nproc)</code>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="app-content">
-            <div style="text-align: center; padding: 40px;">
-                <div style="font-size: 80px; margin-bottom: 20px;">▶️</div>
-                <h2 style="font-size: 24px; margin-bottom: 10px;">YouTube</h2>
-                <p style="opacity: 0.7;">Video & Musik</p>
+    </section>
+
+    <!-- Requirements Section -->
+    <section id="prasyarat">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">🛠️ Prasyarat</span>
+                <h2 class="section-title">Persyaratan Build</h2>
+                <p class="section-subtitle">Pastikan sistem Anda memenuhi persyaratan minimum untuk build AuroraOS</p>
+            </div>
+
+            <div class="requirements-grid">
+                <div class="req-section">
+                    <h3><i class="fas fa-server"></i> Hardware</h3>
+                    <div class="req-table">
+                        <div class="req-row">
+                            <span class="req-label">RAM</span>
+                            <span class="req-value">16 GB <span class="req-value recommended">(32 GB+ recommended)</span></span>
+                        </div>
+                        <div class="req-row">
+                            <span class="req-label">Storage</span>
+                            <span class="req-value">500 GB <span class="req-value recommended">(1 TB SSD recommended)</span></span>
+                        </div>
+                        <div class="req-row">
+                            <span class="req-label">CPU</span>
+                            <span class="req-value">Multi-core <span class="req-value recommended">(8+ cores recommended)</span></span>
+                        </div>
+                        <div class="req-row">
+                            <span class="req-label">Internet</span>
+                            <span class="req-value">Broadband <span class="req-value recommended">(Fiber recommended)</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="req-section">
+                    <h3><i class="fas fa-code"></i> Software</h3>
+                    <div class="req-table">
+                        <div class="req-row">
+                            <span class="req-label">OS</span>
+                            <span class="req-value">Ubuntu 20.04/22.04 LTS</span>
+                        </div>
+                        <div class="req-row">
+                            <span class="req-label">Python</span>
+                            <span class="req-value">3.8+</span>
+                        </div>
+                        <div class="req-row">
+                            <span class="req-label">JDK</span>
+                            <span class="req-value">OpenJDK 17</span>
+                        </div>
+                        <div class="req-row">
+                            <span class="req-label">Git</span>
+                            <span class="req-value">2.0+</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-</div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <h2>Mulai dengan AuroraOS</h2>
+            <p>Bergabunglah dengan komunitas kami dan bangun ROM Android kustom terbaik untuk Indonesia</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/antono4/AuroraOS" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-github"></i> Lihat di GitHub
+                </a>
+                <a href="https://t.me/auroraos" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-telegram"></i> Telegram Group
+                </a>
+            </div>
+        </div>
+    </section>
 
-<!-- Toast -->
-<div class="toast" id="toast">Toast Message</div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon">🌟</div>
+                    <span>AuroraOS</span>
+                </div>
+                <p>Custom Android ROM berbasis NusantaraProject. Dirancang untuk pengalaman Android murni yang dioptimalkan dengan fitur-fitur canggih.</p>
+            </div>
 
-<script>
-// Update time
-function updateTime() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const timeStr = `${hours}:${minutes}`;
-    
-    document.getElementById('status-time').textContent = timeStr;
-    document.getElementById('main-time').textContent = timeStr;
-    
-    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    const dateStr = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
-    document.getElementById('main-date').textContent = dateStr;
-}
+            <div class="footer-links">
+                <h4>Dokumentasi</h4>
+                <ul>
+                    <li><a href="README.md">README</a></li>
+                    <li><a href="QUICKSTART.md">Quick Start</a></li>
+                    <li><a href="BUILD.md">Build Guide</a></li>
+                    <li><a href="docs/BUILD_GUIDE.md">Detail Guide</a></li>
+                </ul>
+            </div>
 
-updateTime();
-setInterval(updateTime, 1000);
+            <div class="footer-links">
+                <h4>Link</h4>
+                <ul>
+                    <li><a href="https://github.com/antono4/AuroraOS" target="_blank">GitHub</a></li>
+                    <li><a href="https://t.me/auroraos" target="_blank">Telegram</a></li>
+                    <li><a href="https://nusantararom.org" target="_blank">NusantaraProject</a></li>
+                    <li><a href="https://source.android.com/" target="_blank">AOSP</a></li>
+                </ul>
+            </div>
 
-// Quick Settings
-function toggleQS(show) {
-    const panel = document.getElementById('qs-panel');
-    if (show) {
-        panel.classList.add('active');
-    } else {
-        panel.classList.remove('active');
-    }
-}
+            <div class="footer-links">
+                <h4>Kredit</h4>
+                <ul>
+                    <li><a href="https://nusantararom.org" target="_blank">NusantaraProject</a></li>
+                    <li><a href="https://source.android.com/" target="_blank">Android Open Source Project</a></li>
+                    <li><a href="https://google.com" target="_blank">Google</a></li>
+                    <li><a href="#">Kontribusi Komunitas</a></li>
+                </ul>
+            </div>
+        </div>
 
-function toggleTile(el) {
-    el.classList.toggle('active');
-    const icon = el.querySelector('i');
-    showToast(el.querySelector('span').textContent + (el.classList.contains('active') ? ' Nyala' : ' Mati'));
-}
+        <div class="footer-bottom">
+            <p>Dibuat dengan ❤️ untuk komunitas Android Indonesia | MIT License</p>
+        </div>
+    </footer>
 
-// Touch events for QS - Attach to device mockup
-let startY = 0;
-let isDragging = false;
-const device = document.getElementById('device');
+    <script>
+        // Hide loading overlay
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1500);
+        });
 
-document.addEventListener('touchstart', (e) => {
-    startY = e.touches[0].clientY;
-    isDragging = true;
-}, { passive: true });
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-document.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - startY;
-    
-    // Show indicator when pulling down from top
-    if (startY < 100 && diff > 20) {
-        document.getElementById('pull-indicator').style.opacity = Math.min(diff / 100, 1);
-    }
-}, { passive: true });
+        // Update phone time
+        function updatePhoneTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const timeStr = `${hours}:${minutes}`;
+            
+            document.querySelectorAll('.phone-time, .phone-time-display').forEach(el => {
+                el.textContent = timeStr;
+            });
+            
+            const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            const dateStr = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+            document.querySelector('.phone-date').textContent = dateStr;
+        }
 
-document.addEventListener('touchend', (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    
-    const endY = e.changedTouches[0].clientY;
-    const diff = endY - startY;
-    
-    // Hide indicator
-    document.getElementById('pull-indicator').style.opacity = 0;
-    
-    // Pull down from top to open QS
-    if (startY < 50 && diff > 100) {
-        toggleQS(true);
-    } 
-    // Pull up from QS to close
-    else if (startY > 200 && diff < -100) {
-        toggleQS(false);
-    }
-}, { passive: true });
+        updatePhoneTime();
+        setInterval(updatePhoneTime, 1000);
 
-// Also allow keyboard shortcut
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'm' || e.key === 'M') toggleQS(true);
-    if (e.key === 'Escape') toggleQS(false);
-});
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-// Add pull indicator to status bar
-document.querySelector('.status-bar').innerHTML += '<div id="pull-indicator" style="position:absolute;top:100%;left:50%;transform:translateX(-50%);padding:5px 15px;background:rgba(139,92,246,0.8);border-radius:20px;font-size:11px;opacity:0;transition:opacity 0.2s;pointer-events:none;">↓ Tarik ke bawah</div>';
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, observerOptions);
 
-// Apps
-function openApp(appId) {
-    const appMap = {
-        'telepon': 'app-telepon',
-        'pesan': 'app-pesan',
-        'chrome': 'app-chrome',
-        'kamera': 'app-kamera',
-        'pengaturan': 'app-pengaturan',
-        'galeri': 'app-galeri',
-        'files': 'app-files',
-        'youtube': 'app-youtube',
-        'weather': 'app-weather',
-        'recorder': 'app-recorder',
-        'privacy': 'app-privacy',
-        'accessibility': 'app-accessibility',
-        'castscreen': 'app-castscreen',
-        'battery': 'app-battery',
-        'split': 'app-split',
-        'carkey': 'app-carkey',
-        'androidauto': 'app-androidauto',
-        'health': 'app-health',
-        'smarthome': 'app-smarthome'
-    };
-    const el = document.getElementById(appMap[appId]);
-    if (el) {
-        el.style.display = 'flex';
-        showToast('Membuka ' + appId);
-    }
-}
-
-function closeApp(appId) {
-    const appMap = {
-        'telepon': 'app-telepon',
-        'pesan': 'app-pesan',
-        'chrome': 'app-chrome',
-        'kamera': 'app-kamera',
-        'pengaturan': 'app-pengaturan',
-        'galeri': 'app-galeri',
-        'files': 'app-files',
-        'youtube': 'app-youtube',
-        'weather': 'app-weather',
-        'recorder': 'app-recorder',
-        'privacy': 'app-privacy',
-        'accessibility': 'app-accessibility',
-        'castscreen': 'app-castscreen',
-        'battery': 'app-battery',
-        'split': 'app-split',
-        'carkey': 'app-carkey',
-        'androidauto': 'app-androidauto',
-        'health': 'app-health',
-        'smarthome': 'app-smarthome'
-    };
-    const el = document.getElementById(appMap[appId]);
-    if (el) {
-        el.style.display = 'none';
-    }
-}
-
-// Phone
-let phoneNumber = '+62';
-function phoneInput(num) {
-    phoneNumber += num;
-    document.getElementById('phone-display').textContent = phoneNumber;
-}
-
-function makeCall() {
-    showToast('Memanggil ' + phoneNumber + '...');
-}
-
-// Camera
-function capturePhoto() {
-    showToast('📸 Foto disimpan!');
-}
-
-// Settings toggle
-function toggleSetting(setting) {
-    const toggle = document.querySelector(`#toggle-${setting}`);
-    if (toggle) {
-        toggle.classList.toggle('active');
-        showToast(setting + ' ' + (toggle.classList.contains('active') ? 'aktif' : 'nonaktif'));
-    }
-}
-
-// Toast
-function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2000);
-}
-
-console.log('AuroraOS UI Demo loaded successfully!');
-
-// Hide loading screen after animation completes
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        document.getElementById('loading-screen').classList.add('hide');
-    }, 2800);
-});
-</script>
-
+        document.querySelectorAll('.feature-card, .android17-card, .build-step').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
