@@ -56,16 +56,110 @@
         .wallpaper {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, var(--aurora-primary), var(--aurora-secondary), #3b82f6);
+            background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             z-index: 1;
+            overflow: hidden;
         }
+
+        .wallpaper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(120, 0, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 0, 128, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 200, 255, 0.2) 0%, transparent 60%);
+            animation: auroraMove 10s ease-in-out infinite;
+        }
+
+        .wallpaper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                /* Stars */
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, white, transparent),
+                radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 160px 120px, white, transparent),
+                radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.9), transparent),
+                radial-gradient(1px 1px at 250px 160px, white, transparent),
+                radial-gradient(2px 2px at 280px 90px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 320px 200px, white, transparent),
+                radial-gradient(2px 2px at 50px 150px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 100px 220px, white, transparent),
+                radial-gradient(2px 2px at 180px 280px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 240px 300px, white, transparent),
+                radial-gradient(2px 2px at 300px 250px, rgba(255,255,255,0.9), transparent),
+                radial-gradient(1px 1px at 340px 180px, white, transparent);
+            background-size: 400px 400px;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        /* Mobile Legends Logo Effect */
+        .ml-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            opacity: 0.08;
+            z-index: 2;
+            text-shadow: 0 0 50px rgba(255, 0, 128, 0.5);
+        }
+
+        /* Gaming particles */
+        .particles {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 15s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 15s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 12s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 20s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 16s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 14s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 19s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 1.5s; animation-duration: 17s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 4.5s; animation-duration: 13s; }
+        .particle:nth-child(10) { left: 95%; animation-delay: 0.5s; animation-duration: 21s; }
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        @keyframes auroraMove {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(800px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-800px) rotate(720deg); opacity: 0; }
         }
 
         .system-ui {
@@ -463,9 +557,25 @@
     <i class="fa-solid fa-arrow-down"></i> Tarik dari atas untuk Quick Settings
 </div>
 
-<div class="device-mockup" id="device">
+    <div class="device-mockup" id="device">
     <div class="camera-hole"></div>
-    <div class="wallpaper"></div>
+    <div class="wallpaper">
+        <!-- Gaming Logo -->
+        <div class="ml-logo">⚔️</div>
+        <!-- Floating Particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
 
     <!-- System UI -->
     <div class="system-ui">
@@ -489,6 +599,12 @@
 
             <!-- App Grid -->
             <div class="app-grid">
+                <div class="app-icon" onclick="openApp('mobilelegends')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #ff1744, #d50000);">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <span class="app-icon-label">ML BB</span>
+                </div>
                 <div class="app-icon" onclick="openApp('telepon')">
                     <div class="app-icon-img" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
                         <i class="fa-solid fa-phone"></i>
@@ -507,6 +623,12 @@
                     </div>
                     <span class="app-icon-label">Chrome</span>
                 </div>
+                <div class="app-icon" onclick="openApp('gamecenter')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #7c4dff, #651fff);">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <span class="app-icon-label">Game Ctr</span>
+                </div>
                 <div class="app-icon" onclick="openApp('kamera')">
                     <div class="app-icon-img" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">
                         <i class="fa-solid fa-camera"></i>
@@ -524,12 +646,6 @@
                         <i class="fa-solid fa-image"></i>
                     </div>
                     <span class="app-icon-label">Galeri</span>
-                </div>
-                <div class="app-icon" onclick="openApp('files')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                        <i class="fa-solid fa-folder"></i>
-                    </div>
-                    <span class="app-icon-label">Files</span>
                 </div>
                 <div class="app-icon" onclick="openApp('youtube')">
                     <div class="app-icon-img" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
@@ -584,6 +700,108 @@
             <div class="qs-tile" onclick="toggleTile(this)">
                 <i class="fa-solid fa-flashlight"></i>
                 <span>Senter</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MOBILE LEGENDS APP ==================== -->
+    <div class="app-screen" id="app-mobilelegends">
+        <div class="app-header" style="background: linear-gradient(135deg, #ff1744, #d50000);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('mobilelegends')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Mobile Legends</span>
+            </div>
+        </div>
+        <div class="app-content" style="background: linear-gradient(180deg, #1a0a0a 0%, #2d1515 100%);">
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 80px; margin-bottom: 15px;">⚔️</div>
+                <h2 style="font-size: 24px; color: #ff1744; margin-bottom: 5px;">Mobile Legends</h2>
+                <p style="opacity: 0.7;">Bang Bang</p>
+                <div style="margin-top: 15px;">
+                    <span style="background: #ff1744; padding: 8px 25px; border-radius: 20px; font-size: 14px; font-weight: 600;">PLAY</span>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-weight: 600;">Season Info</span>
+                    <span style="color: #ffd700;">S32</span>
+                </div>
+                <div style="font-size: 13px; opacity: 0.7;">Rank: Epic ⭐⭐⭐</div>
+                <div style="font-size: 13px; opacity: 0.7;">Win Rate: 52.3%</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">🎮</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Games</div>
+                    <div style="font-weight: 600;">245</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">🏆</div>
+                    <div style="font-size: 12px; opacity: 0.7;">MVP</div>
+                    <div style="font-weight: 600;">87</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">🔥</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Win Streak</div>
+                    <div style="font-weight: 600;">3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GAME CENTER APP ==================== -->
+    <div class="app-screen" id="app-gamecenter">
+        <div class="app-header" style="background: linear-gradient(135deg, #7c4dff, #651fff);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('gamecenter')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Game Center</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 50px;">🏆</div>
+                <h2 style="font-size: 22px; margin-bottom: 5px;">Achievements</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;">
+                <div style="background: linear-gradient(135deg, #ffd700, #ff9800); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 30px;">🥇</div>
+                    <div style="font-size: 11px; margin-top: 5px;">Legend</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #c0c0c0, #9e9e9e); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 30px;">🥈</div>
+                    <div style="font-size: 11px; margin-top: 5px;">Master</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #cd7f32, #a0522d); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 30px;">🥉</div>
+                    <div style="font-size: 11px; margin-top: 5px;">Epic</div>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+                <h3 style="margin-bottom: 10px;">Recent Games</h3>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <span style="font-size: 24px;">⚔️</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">Mobile Legends</div>
+                        <div style="font-size: 12px; opacity: 0.6;">2 jam lalu</div>
+                    </div>
+                    <span style="color: #22c55e;">WIN</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <span style="font-size: 24px;">🎮</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">PUBG Mobile</div>
+                        <div style="font-size: 12px; opacity: 0.6;">5 jam lalu</div>
+                    </div>
+                    <span style="color: #ef4444;">LOSE</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0;">
+                    <span style="font-size: 24px;">🏆</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">Free Fire</div>
+                        <div style="font-size: 12px; opacity: 0.6;">Kemarin</div>
+                    </div>
+                    <span style="color: #22c55e;">WIN</span>
+                </div>
             </div>
         </div>
     </div>
@@ -917,7 +1135,9 @@ function openApp(appId) {
         'pengaturan': 'app-pengaturan',
         'galeri': 'app-galeri',
         'files': 'app-files',
-        'youtube': 'app-youtube'
+        'youtube': 'app-youtube',
+        'mobilelegends': 'app-mobilelegends',
+        'gamecenter': 'app-gamecenter'
     };
     const el = document.getElementById(appMap[appId]);
     if (el) {
@@ -935,7 +1155,9 @@ function closeApp(appId) {
         'pengaturan': 'app-pengaturan',
         'galeri': 'app-galeri',
         'files': 'app-files',
-        'youtube': 'app-youtube'
+        'youtube': 'app-youtube',
+        'mobilelegends': 'app-mobilelegends',
+        'gamecenter': 'app-gamecenter'
     };
     const el = document.getElementById(appMap[appId]);
     if (el) {
