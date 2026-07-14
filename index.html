@@ -58,7 +58,7 @@
             inset: 0;
             background: linear-gradient(180deg, #1a0505 0%, #2d0a0a 30%, #3d1010 60%, #1a0505 100%);
             background-size: 400% 400%;
-            animation: mlGradientShift 8s ease infinite;
+            animation: auroraGradient 8s ease infinite;
             z-index: 1;
             overflow: hidden;
         }
@@ -75,7 +75,7 @@
                 radial-gradient(ellipse at 70% 80%, rgba(255, 80, 0, 0.3) 0%, transparent 50%),
                 /* Top dark overlay */
                 radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
-            animation: fireGlow 3s ease-in-out infinite alternate;
+            animation: auroraGlow 3s ease-in-out infinite alternate;
         }
 
         /* Hero silhouette pattern */
@@ -100,11 +100,11 @@
                 linear-gradient(135deg, transparent 45%, rgba(255, 100, 0, 0.1) 50%, transparent 55%),
                 linear-gradient(-135deg, transparent 45%, rgba(255, 80, 0, 0.1) 50%, transparent 55%);
             background-size: 100% 100%;
-            animation: heroMove 6s ease-in-out infinite;
+            animation: auroraMove 6s ease-in-out infinite;
         }
 
-        /* ML BB Logo watermark */
-        .ml-logo {
+        /* Aurora OS Logo watermark */
+        .aurora-logo {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -114,18 +114,18 @@
             opacity: 0.15;
         }
 
-        .ml-logo .logo-text {
+        .aurora-logo .logo-text {
             font-size: 48px;
             font-weight: 700;
-            color: #ff4444;
+            color: #8b5cf6;
             text-shadow: 0 0 30px rgba(255, 68, 68, 0.8), 0 0 60px rgba(255, 68, 68, 0.4);
             letter-spacing: 4px;
         }
 
-        .ml-logo .logo-bang {
+        .aurora-logo .logo-sub {
             font-size: 32px;
             font-weight: 700;
-            color: #ffaa00;
+            color: #0ea5e9;
             text-shadow: 0 0 20px rgba(255, 170, 0, 0.8);
             letter-spacing: 8px;
             margin-top: -5px;
@@ -143,10 +143,10 @@
             position: absolute;
             width: 6px;
             height: 6px;
-            background: radial-gradient(circle, #ff6600, #ff3300, transparent);
+            background: radial-gradient(circle, #8b5cf6, #06b6d4, transparent);
             border-radius: 50%;
-            animation: fireRise 8s linear infinite;
-            box-shadow: 0 0 10px #ff4400, 0 0 20px #ff2200;
+            animation: auroraRise 8s linear infinite;
+            box-shadow: 0 0 10px #8b5cf6, 0 0 20px #06b6d4;
         }
 
         .particle:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 6s; }
@@ -168,7 +168,7 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 100, 0, 0.8), transparent);
             animation: orbFloat 10s ease-in-out infinite;
-            box-shadow: 0 0 20px #ff4400, 0 0 40px #ff2200;
+            box-shadow: 0 0 20px #8b5cf6, 0 0 40px #06b6d4;
         }
 
         .energy-orb:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
@@ -180,7 +180,7 @@
         .loading-screen {
             position: fixed;
             inset: 0;
-            background: linear-gradient(180deg, #1a0505 0%, #2d0a0a 50%, #1a0505 100%);
+            background: linear-gradient(180deg, #0f0c29 0%, #1a1a3e 50%, #0f0c29 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -196,21 +196,23 @@
         }
 
         .loading-logo {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: #ff4444;
-            text-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
-            letter-spacing: 3px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            letter-spacing: 4px;
             animation: logoPulse 1.5s ease-in-out infinite;
             margin-bottom: 5px;
         }
 
-        .loading-logo-bang {
-            font-size: 28px;
-            font-weight: 700;
-            color: #ffaa00;
-            text-shadow: 0 0 20px rgba(255, 170, 0, 0.8);
-            letter-spacing: 8px;
+        .loading-logo-sub {
+            font-size: 20px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 12px;
             margin-bottom: 40px;
         }
 
@@ -224,9 +226,10 @@
 
         .loading-bar {
             height: 100%;
-            background: linear-gradient(90deg, #ff4444, #ffaa00);
+            background: linear-gradient(90deg, #8b5cf6, #0ea5e9, #8b5cf6);
+            background-size: 200% 100%;
             border-radius: 2px;
-            animation: loadingProgress 2.5s ease-in-out forwards;
+            animation: loadingProgress 2.5s ease-in-out forwards, auroraShimmer 1.5s linear infinite;
         }
 
         .loading-text {
@@ -247,9 +250,9 @@
             position: absolute;
             width: 4px;
             height: 4px;
-            background: #ff6600;
+            background: #8b5cf6;
             border-radius: 50%;
-            box-shadow: 0 0 10px #ff4400;
+            box-shadow: 0 0 10px #8b5cf6;
             animation: sparkFly 1.5s ease-out infinite;
         }
 
@@ -273,6 +276,11 @@
             100% { width: 100%; }
         }
 
+        @keyframes auroraShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         @keyframes textBlink {
             0%, 100% { opacity: 0.6; }
             50% { opacity: 1; }
@@ -283,23 +291,23 @@
             100% { transform: translate(calc((var(--tx, 0.5) - 0.5) * 200px), calc((var(--ty, 0.5) - 0.5) * -200px)) scale(0); opacity: 0; }
         }
 
-        @keyframes mlGradientShift {
+        @keyframes auroraGradient {
             0% { background-position: 0% 50%; filter: brightness(1); }
             50% { background-position: 100% 50%; filter: brightness(1.1); }
             100% { background-position: 0% 50%; filter: brightness(1); }
         }
 
-        @keyframes fireGlow {
+        @keyframes auroraGlow {
             0% { opacity: 0.8; }
             100% { opacity: 1; }
         }
 
-        @keyframes heroMove {
+        @keyframes auroraMove {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-10px) scale(1.05); }
         }
 
-        @keyframes fireRise {
+        @keyframes auroraRise {
             0% { 
                 transform: translateY(800px) scale(1); 
                 opacity: 0; 
@@ -723,8 +731,8 @@
         <div class="spark"></div>
         <div class="spark"></div>
     </div>
-    <div class="loading-logo">MOBILE LEGENDS</div>
-    <div class="loading-logo-bang">BANG BANG</div>
+    <div class="loading-logo">AURORA OS</div>
+    <div class="loading-logo-sub">CUSTOM ROM</div>
     <div class="loading-bar-container">
         <div class="loading-bar"></div>
     </div>
@@ -734,13 +742,12 @@
     <div class="device-mockup" id="device">
     <div class="camera-hole"></div>
     <div class="wallpaper">
-        <!-- ML BB Logo Watermark -->
-        <div class="ml-logo">
-            <div class="logo-text">MOBILE</div>
-            <div class="logo-text">LEGENDS</div>
-            <div class="logo-bang">BANG BANG</div>
+        <!-- Aurora OS Logo Watermark -->
+        <div class="aurora-logo">
+            <div class="logo-text">AURORA OS</div>
+            <div class="logo-sub">CUSTOM ROM</div>
         </div>
-        <!-- Fire Particles -->
+        <!-- Aurora Particles -->
         <div class="particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -783,10 +790,10 @@
             <!-- App Grid -->
             <div class="app-grid">
                 <div class="app-icon" onclick="openApp('mobilelegends')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #ff1744, #d50000);">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
                         <i class="fa-solid fa-gamepad"></i>
                     </div>
-                    <span class="app-icon-label">ML BB</span>
+                    <span class="app-icon-label">Aurora</span>
                 </div>
                 <div class="app-icon" onclick="openApp('telepon')">
                     <div class="app-icon-img" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
@@ -887,21 +894,21 @@
         </div>
     </div>
 
-    <!-- ==================== MOBILE LEGENDS APP ==================== -->
+    <!-- ==================== AURORA OS APP ==================== -->
     <div class="app-screen" id="app-mobilelegends">
-        <div class="app-header" style="background: linear-gradient(135deg, #ff1744, #d50000);">
+        <div class="app-header" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
             <div class="app-nav">
                 <button class="app-back" onclick="closeApp('mobilelegends')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Mobile Legends</span>
+                <span class="app-title">Aurora OS</span>
             </div>
         </div>
         <div class="app-content" style="background: linear-gradient(180deg, #1a0a0a 0%, #2d1515 100%);">
             <div style="text-align: center; padding: 20px 0;">
                 <div style="font-size: 80px; margin-bottom: 15px;">⚔️</div>
-                <h2 style="font-size: 24px; color: #ff1744; margin-bottom: 5px;">Mobile Legends</h2>
-                <p style="opacity: 0.7;">Bang Bang</p>
+                <h2 style="font-size: 24px; color: #8b5cf6; margin-bottom: 5px;">Aurora OS</h2>
+                <p style="opacity: 0.7;">Custom ROM</p>
                 <div style="margin-top: 15px;">
-                    <span style="background: #ff1744; padding: 8px 25px; border-radius: 20px; font-size: 14px; font-weight: 600;">PLAY</span>
+                    <span style="background: #8b5cf6; padding: 8px 25px; border-radius: 20px; font-size: 14px; font-weight: 600;">PLAY</span>
                 </div>
             </div>
             <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 15px;">
@@ -964,7 +971,7 @@
                 <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                     <span style="font-size: 24px;">⚔️</span>
                     <div style="flex: 1;">
-                        <div style="font-weight: 600;">Mobile Legends</div>
+                        <div style="font-weight: 600;">Aurora OS</div>
                         <div style="font-size: 12px; opacity: 0.6;">2 jam lalu</div>
                     </div>
                     <span style="color: #22c55e;">WIN</span>
@@ -1183,12 +1190,12 @@
                 <span style="opacity: 0.5;">Album</span>
             </div>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;">
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #ff6b6b, #ffd93d); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #a78bfa, #38bdf8); border-radius: 5px;"></div>
                 <div style="aspect-ratio: 1; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 5px;"></div>
                 <div style="aspect-ratio: 1; background: linear-gradient(135deg, #a855f7, #ec4899); border-radius: 5px;"></div>
                 <div style="aspect-ratio: 1; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 5px;"></div>
                 <div style="aspect-ratio: 1; background: linear-gradient(135deg, #00d9a5, #4f8fff); border-radius: 5px;"></div>
-                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #ff8a50, #ff6b9d); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #818cf8, #22d3ee); border-radius: 5px;"></div>
             </div>
         </div>
     </div>
