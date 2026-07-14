@@ -555,8 +555,7 @@
             <div class="status-bar" id="status-bar">
                 <span id="sb-time">12:00</span>
                 <div class="flex gap-2 items-center">
-                    <i class="fa-solid fa-wifi text-[10px]"></i>
-                    <i class="fa-solid fa-signal text-[10px]"></i>
+                    <i class="fa-solid fa-plane text-[10px]" id="airplane-icon"></i>
                     <span class="text-[10px] mr-1">85%</span>
                     <i class="fa-solid fa-battery-three-quarters text-[12px]"></i>
                 </div>
@@ -692,11 +691,11 @@
                         </div>
                         
                         <!-- Tile 5: Airplane Mode -->
-                        <div class="qs-tile" id="tile-airplane">
+                        <div class="qs-tile active" id="tile-airplane">
                             <div class="qs-tile-icon"><i class="fa-solid fa-plane"></i></div>
                             <div class="qs-tile-text">
                                 <span class="qs-tile-title">Mode Pesawat</span>
-                                <span class="qs-tile-subtitle">Mati</span>
+                                <span class="qs-tile-subtitle">Nyala</span>
                             </div>
                         </div>
                         
@@ -710,11 +709,11 @@
                         </div>
                         
                         <!-- Tile 7: Hotspot -->
-                        <div class="qs-tile" id="tile-hotspot">
+                        <div class="qs-tile active" id="tile-hotspot">
                             <div class="qs-tile-icon"><i class="fa-solid fa-wifi"></i></div>
                             <div class="qs-tile-text">
                                 <span class="qs-tile-title">Hotspot</span>
-                                <span class="qs-tile-subtitle">Mati</span>
+                                <span class="qs-tile-subtitle">Aurora_Share</span>
                             </div>
                         </div>
                         
@@ -724,6 +723,69 @@
                             <div class="qs-tile-text">
                                 <span class="qs-tile-title">Penghemat Baterai</span>
                                 <span class="qs-tile-subtitle">Nyala</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 9: Data Saver -->
+                        <div class="qs-tile active" id="tile-data">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-database"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">Hemat Data</span>
+                                <span class="qs-tile-subtitle">Nyala</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 10: Dark Mode -->
+                        <div class="qs-tile active" id="tile-dark">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-moon"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">Mode Gelap</span>
+                                <span class="qs-tile-subtitle">Nyala</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 11: Night Light -->
+                        <div class="qs-tile" id="tile-nightlight">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-sun"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">Night Light</span>
+                                <span class="qs-tile-subtitle">Mati</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 12: NFC -->
+                        <div class="qs-tile active" id="tile-nfc">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-wifi"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">NFC</span>
+                                <span class="qs-tile-subtitle">Nyala</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 13: Cast -->
+                        <div class="qs-tile" id="tile-cast">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-tv"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">Cast</span>
+                                <span class="qs-tile-subtitle">Mati</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 14: Focus Mode -->
+                        <div class="qs-tile" id="tile-focus">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-brain"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">Focus</span>
+                                <span class="qs-tile-subtitle">Mati</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tile 15: VPN -->
+                        <div class="qs-tile active" id="tile-vpn">
+                            <div class="qs-tile-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div class="qs-tile-text">
+                                <span class="qs-tile-title">VPN</span>
+                                <span class="qs-tile-subtitle">Aurora Secure</span>
                             </div>
                         </div>
                     </div>
@@ -1016,8 +1078,14 @@
                     if(title === 'Bluetooth') subtitle.textContent = 'Earbuds Pro';
                     if(title === 'Jangan Ganggu') subtitle.textContent = 'Nyala';
                     if(title === 'Senter') subtitle.textContent = 'Nyala';
+                    if(title === 'Mode Pesawat') subtitle.textContent = 'Nyala';
                     if(title === 'Lokasi') subtitle.textContent = 'Nyala';
+                    if(title === 'Hotspot') subtitle.textContent = 'Aurora_Share';
                     if(title === 'Penghemat Baterai') subtitle.textContent = 'Nyala';
+                    if(title === 'Hemat Data') subtitle.textContent = 'Nyala';
+                    if(title === 'Mode Gelap') subtitle.textContent = 'Nyala';
+                    if(title === 'NFC') subtitle.textContent = 'Nyala';
+                    if(title === 'VPN') subtitle.textContent = 'Aurora Secure';
                 } else {
                     subtitle.textContent = 'Mati';
                 }
