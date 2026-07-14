@@ -56,48 +56,48 @@
         .wallpaper {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, #1a0505 0%, #2d0a0a 30%, #3d1010 60%, #1a0505 100%);
+            background: linear-gradient(180deg, #0f0c29 0%, #1a0a2e 30%, #24243e 60%, #0f0c29 100%);
             background-size: 400% 400%;
             animation: auroraGradient 8s ease infinite;
             z-index: 1;
             overflow: hidden;
         }
 
-        /* Fire/Glow effect layer */
+        /* Aurora/Glow effect layer */
         .wallpaper::before {
             content: '';
             position: absolute;
             inset: 0;
             background: 
-                /* Fire glow from bottom */
-                radial-gradient(ellipse at 50% 100%, rgba(255, 50, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(ellipse at 30% 80%, rgba(255, 100, 0, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(255, 80, 0, 0.3) 0%, transparent 50%),
+                /* Aurora glow from bottom */
+                radial-gradient(ellipse at 50% 100%, rgba(139, 92, 246, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
                 /* Top dark overlay */
                 radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
             animation: auroraGlow 3s ease-in-out infinite alternate;
         }
 
-        /* Hero silhouette pattern */
+        /* Aurora particles pattern */
         .wallpaper::after {
             content: '';
             position: absolute;
             inset: 0;
             background-image: 
                 /* Warrior silhouette 1 */
-                radial-gradient(ellipse 80px 120px at 15% 70%, rgba(139, 0, 0, 0.3) 0%, transparent 100%),
+                radial-gradient(ellipse 80px 120px at 15% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 100%),
                 /* Warrior silhouette 2 */
-                radial-gradient(ellipse 100px 140px at 85% 65%, rgba(100, 0, 0, 0.25) 0%, transparent 100%),
+                radial-gradient(ellipse 100px 140px at 85% 65%, rgba(6, 182, 212, 0.25) 0%, transparent 100%),
                 /* Energy particles */
-                radial-gradient(3px 3px at 10% 20%, rgba(255, 100, 0, 0.6), transparent),
-                radial-gradient(2px 2px at 25% 35%, rgba(255, 80, 0, 0.5), transparent),
-                radial-gradient(3px 3px at 40% 15%, rgba(255, 120, 0, 0.6), transparent),
-                radial-gradient(2px 2px at 55% 40%, rgba(255, 90, 0, 0.5), transparent),
-                radial-gradient(3px 3px at 70% 25%, rgba(255, 100, 0, 0.6), transparent),
-                radial-gradient(2px 2px at 85% 45%, rgba(255, 80, 0, 0.5), transparent),
-                radial-gradient(3px 3px at 95% 30%, rgba(255, 110, 0, 0.6), transparent),
+                radial-gradient(3px 3px at 10% 20%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 25% 35%, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(3px 3px at 40% 15%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 55% 40%, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(3px 3px at 70% 25%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 85% 45%, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(3px 3px at 95% 30%, rgba(255, 255, 255, 0.8), transparent),
                 /* Sword slash marks */
-                linear-gradient(135deg, transparent 45%, rgba(255, 100, 0, 0.1) 50%, transparent 55%),
+                linear-gradient(135deg, transparent 45%, rgba(139, 92, 246, 0.1) 50%, transparent 55%),
                 linear-gradient(-135deg, transparent 45%, rgba(255, 80, 0, 0.1) 50%, transparent 55%);
             background-size: 100% 100%;
             animation: auroraMove 6s ease-in-out infinite;
@@ -699,4 +699,853 @@
             opacity: 1;
         }
 
+        /* Demo hint */
+        .demo-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            z-index: 1000;
+        }
 
+        .demo-hint i { margin-right: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="demo-hint">
+    <i class="fa-solid fa-arrow-down"></i> Tarik dari atas untuk Quick Settings
+</div>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loading-screen">
+    <div class="loading-sparks">
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+    </div>
+    <div class="loading-logo">AURORA OS</div>
+    <div class="loading-logo-sub">CUSTOM ROM</div>
+    <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+    </div>
+    <div class="loading-text">Loading AuroraOS...</div>
+</div>
+
+    <div class="device-mockup" id="device">
+    <div class="camera-hole"></div>
+    <div class="wallpaper">
+        <!-- Aurora OS Logo Watermark -->
+        <div class="aurora-logo">
+            <div class="logo-text">AURORA OS</div>
+            <div class="logo-sub">CUSTOM ROM</div>
+        </div>
+        <!-- Aurora Particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <!-- Energy Orbs -->
+        <div class="energy-orb"></div>
+        <div class="energy-orb"></div>
+        <div class="energy-orb"></div>
+        <div class="energy-orb"></div>
+    </div>
+
+    <!-- System UI -->
+    <div class="system-ui">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="status-time">12:00</span>
+            <div class="status-icons">
+                <i class="fa-solid fa-plane"></i>
+                <i class="fa-solid fa-wifi"></i>
+                <span>85%</span>
+                <i class="fa-solid fa-battery-three-quarters"></i>
+            </div>
+        </div>
+
+        <!-- Home Content -->
+        <div class="home-content">
+            <div class="time-display">
+                <div class="main-time" id="main-time">12:00</div>
+                <div class="main-date" id="main-date">Sel, 14 Jul</div>
+            </div>
+
+            <!-- App Grid -->
+            <div class="app-grid">
+                <div class="app-icon" onclick="openApp('weather')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </div>
+                    <span class="app-icon-label">Cuaca</span>
+                </div>
+                <div class="app-icon" onclick="openApp('telepon')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <span class="app-icon-label">Telepon</span>
+                </div>
+                <div class="app-icon" onclick="openApp('pesan')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <span class="app-icon-label">Pesan</span>
+                </div>
+                <div class="app-icon" onclick="openApp('chrome')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                        <i class="fa-brands fa-chrome"></i>
+                    </div>
+                    <span class="app-icon-label">Chrome</span>
+                </div>
+                <div class="app-icon" onclick="openApp('recorder')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <span class="app-icon-label">Recorder</span>
+                </div>
+                <div class="app-icon" onclick="openApp('kamera')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <span class="app-icon-label">Kamera</span>
+                </div>
+                <div class="app-icon" onclick="openApp('privacy')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <span class="app-icon-label">Pengaturan</span>
+                </div>
+                <div class="app-icon" onclick="openApp('health')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <span class="app-icon-label">Galeri</span>
+                </div>
+                <div class="app-icon" onclick="openApp('smarthome')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                        <i class="fa-brands fa-home"></i>
+                    </div>
+                    <span class="app-icon-label">YouTube</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <div class="nav-indicator"></div>
+        </div>
+    </div>
+
+    <!-- Quick Settings Panel -->
+    <div class="qs-panel" id="qs-panel">
+        <div class="qs-header">
+            <span class="qs-title">Quick Settings</span>
+            <button class="app-back" onclick="toggleQS(false)"><i class="fa-solid fa-caret-down"></i></button>
+        </div>
+        <div class="qs-grid">
+            <div class="qs-tile active" onclick="toggleTile(this)">
+                <i class="fa-solid fa-wifi"></i>
+                <span>Wi-Fi</span>
+            </div>
+            <div class="qs-tile active" onclick="toggleTile(this)">
+                <i class="fa-brands fa-bluetooth-b"></i>
+                <span>Bluetooth</span>
+            </div>
+            <div class="qs-tile" onclick="toggleTile(this)">
+                <i class="fa-solid fa-moon"></i>
+                <span>Mode Gelap</span>
+            </div>
+            <div class="qs-tile" onclick="toggleTile(this)">
+                <i class="fa-solid fa-plane"></i>
+                <span>Pesawat</span>
+            </div>
+            <div class="qs-tile" onclick="toggleTile(this)">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Lokasi</span>
+            </div>
+            <div class="qs-tile active" onclick="toggleTile(this)">
+                <i class="fa-solid fa-battery-full"></i>
+                <span>Baterai</span>
+            </div>
+            <div class="qs-tile" onclick="toggleTile(this)">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Hotspot</span>
+            </div>
+            <div class="qs-tile" onclick="toggleTile(this)">
+                <i class="fa-solid fa-flashlight"></i>
+                <span>Senter</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AURORA OS APP ==================== -->
+    <div class="app-screen" id="app-mobilelegends">
+        <div class="app-header" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('mobilelegends')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Aurora OS</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="text-align: center; padding: 30px 0;">
+                <div style="font-size: 80px; margin-bottom: 15px;">✨</div>
+                <h2 style="font-size: 24px; color: #8b5cf6; margin-bottom: 5px;">Aurora OS</h2>
+                <p style="opacity: 0.7;">Custom ROM v2.0</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-weight: 600;">Info Sistem</span>
+                </div>
+                <div style="font-size: 13px; opacity: 0.7;">Android 14</div>
+                <div style="font-size: 13px; opacity: 0.7;">Security Patch: Jul 2024</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">🚀</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Performa</div>
+                    <div style="font-weight: 600; color: #22c55e;">Optimal</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">🔋</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Baterai</div>
+                    <div style="font-weight: 600;">85%</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">💾</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Penyimpanan</div>
+                    <div style="font-weight: 600;">128GB</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 24px;">📶</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Sinyal</div>
+                    <div style="font-weight: 600;">Excellent</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SCREEN RECORDER APP ==================== -->
+    <div class="app-screen" id="app-recorder">
+        <div class="app-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('recorder')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Screen Recorder</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="background: #000; border-radius: 20px; aspect-ratio: 9/16; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; opacity: 0.3;">⏺️</div>
+                    <div style="font-size: 32px; margin-top: 10px; font-weight: 300;">00:00</div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                <button style="width: 70px; height: 70px; border-radius: 50%; background: #ef4444; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 25px; height: 25px; background: white; border-radius: 50%;"></div>
+                </button>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div><div style="font-size: 14px;">Rekam audio</div><div style="font-size: 11px; opacity: 0.6;">Dengan mikrofon</div></div>
+                    <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                    <div><div style="font-size: 14px;">Kualitas video</div><div style="font-size: 11px; opacity: 0.6;">1080p Full HD</div></div>
+                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PRIVACY DASHBOARD ==================== -->
+    <div class="app-screen" id="app-privacy">
+        <div class="app-header" style="background: linear-gradient(135deg, #10b981, #059669);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('privacy')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Privasi</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 50px; margin-bottom: 10px;">🔒</div>
+                <h2 style="font-size: 20px;">Privacy Dashboard</h2>
+                <p style="font-size: 13px; opacity: 0.7;">Pantau penggunaan sensor</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;">
+                    <div style="width: 40px; height: 40px; background: #22c55e; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;"><i class="fa-solid fa-camera"></i></div>
+                    <div style="font-size: 11px; opacity: 0.6;">Kamera</div>
+                    <div style="font-size: 20px; font-weight: 600;">2</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;">
+                    <div style="width: 40px; height: 40px; background: #ef4444; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;"><i class="fa-solid fa-microphone"></i></div>
+                    <div style="font-size: 11px; opacity: 0.6;">Mikrofon</div>
+                    <div style="font-size: 20px; font-weight: 600;">5</div>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <h3 style="margin-bottom: 15px;">Akses Terkini</h3>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div style="flex: 1;"><div style="font-weight: 600;">WhatsApp</div><div style="font-size: 11px; opacity: 0.6;">Mikrofon • 5 menit lalu</div></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-chrome"></i></div>
+                    <div style="flex: 1;"><div style="font-weight: 600;">Chrome</div><div style="font-size: 11px; opacity: 0.6;">Kamera • 1 jam lalu</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== WEATHER APP ==================== -->
+    <div class="app-screen" id="app-weather">
+        <div class="app-header" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('weather')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Cuaca</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="background: linear-gradient(180deg, #3b82f6, #1e40af); border-radius: 25px; padding: 25px; text-align: center; margin-bottom: 15px;">
+                <div style="font-size: 80px; margin-bottom: 10px;">☀️</div>
+                <div style="font-size: 72px; font-weight: 200;">28°</div>
+                <div style="font-size: 16px; opacity: 0.9;">Cerah</div>
+                <div style="font-size: 13px; opacity: 0.7; margin-top: 10px;">Jakarta • Sekarang</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">06:00</div><div style="font-size: 24px; margin: 5px 0;">🌤️</div><div style="font-size: 13px;">26°</div></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">09:00</div><div style="font-size: 24px; margin: 5px 0;">☀️</div><div style="font-size: 13px;">29°</div></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">12:00</div><div style="font-size: 24px; margin: 5px 0;">🌞</div><div style="font-size: 13px;">32°</div></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">15:00</div><div style="font-size: 24px; margin: 5px 0;">⛅</div><div style="font-size: 13px;">31°</div></div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span style="font-weight: 600;">Detail</span></div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-wind" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Angin</div><div style="font-size: 13px;">12 km/j</div></div></div>
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-tint" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Kelembaban</div><div style="font-size: 13px;">65%</div></div></div>
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-eye" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Visibilitas</div><div style="font-size: 13px;">10 km</div></div></div>
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-compress-alt" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Tekanan</div><div style="font-size: 13px;">1012 hPa</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEALTH CONNECT ==================== -->
+    <div class="app-screen" id="app-health">
+        <div class="app-header" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('health')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Health</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="text-align: center; padding: 15px 0;">
+                <div style="font-size: 50px; margin-bottom: 10px;">❤️</div>
+                <div style="font-size: 36px; font-weight: 600; color: #ec4899;">8,432</div>
+                <div style="font-size: 13px; opacity: 0.7;">Langkah hari ini</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">🔥</div><div style="font-size: 18px; font-weight: 600;">342</div><div style="font-size: 10px; opacity: 0.6;">Kalori</div></div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">⏱️</div><div style="font-size: 18px; font-weight: 600;">45m</div><div style="font-size: 10px; opacity: 0.6;">Aktif</div></div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">💤</div><div style="font-size: 18px; font-weight: 600;">7h</div><div style="font-size: 10px; opacity: 0.6;">Tidur</div></div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <h3 style="margin-bottom: 15px;">Aktivitas</h3>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 5px; height: 80px;">
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 60%;"></div><div style="font-size: 10px; margin-top: 5px;">Sen</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 80%;"></div><div style="font-size: 10px; margin-top: 5px;">Sel</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 50%;"></div><div style="font-size: 10px; margin-top: 5px;">Rab</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 70%;"></div><div style="font-size: 10px; margin-top: 5px;">Kam</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 90%;"></div><div style="font-size: 10px; margin-top: 5px;">Jum</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.8); border-radius: 4px; height: 100%;"></div><div style="font-size: 10px; margin-top: 5px;">Sab</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.4); border-radius: 4px; height: 40%;"></div><div style="font-size: 10px; margin-top: 5px;">Min</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SMART HOME ==================== -->
+    <div class="app-screen" id="app-smarthome">
+        <div class="app-header" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('smarthome')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Smart Home</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+                <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">💡</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">Lampu Ruang</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Nyala</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(79, 70, 229, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">❄️</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">AC Kamar</div>
+                    <div style="font-size: 12px; opacity: 0.7;">24°C</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">📺</span><div class="toggle" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">Smart TV</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Mati</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">🔌</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">Stop Kontak</div>
+                    <div style="font-size: 12px; opacity: 0.7;">3 aktif</div>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <h3 style="margin-bottom: 15px;">Rutinitas</h3>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(14, 165, 233, 0.15); border-radius: 12px; margin-bottom: 10px;">
+                    <span style="font-size: 24px;">🌅</span>
+                    <div style="flex: 1;"><div style="font-weight: 600;">Pagi Hari</div><div style="font-size: 11px; opacity: 0.6;">06:00</div></div>
+                    <div class="toggle active"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(251, 146, 60, 0.15); border-radius: 12px;">
+                    <span style="font-size: 24px;">🌙</span>
+                    <div style="flex: 1;"><div style="font-weight: 600;">Tidur</div><div style="font-size: 11px; opacity: 0.6;">23:00</div></div>
+                    <div class="toggle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TELEPON APP ==================== -->
+    <div class="app-screen" id="app-telepon">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('telepon')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Telepon</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div class="phone-display" id="phone-display">+62</div>
+            <div class="phone-keypad">
+                <button class="phone-btn" onclick="phoneInput('1')">1</button>
+                <button class="phone-btn" onclick="phoneInput('2')">2<span>ABC</span></button>
+                <button class="phone-btn" onclick="phoneInput('3')">3<span>DEF</span></button>
+                <button class="phone-btn" onclick="phoneInput('4')">4<span>GHI</span></button>
+                <button class="phone-btn" onclick="phoneInput('5')">5<span>JKL</span></button>
+                <button class="phone-btn" onclick="phoneInput('6')">6<span>MNO</span></button>
+                <button class="phone-btn" onclick="phoneInput('7')">7<span>PQRS</span></button>
+                <button class="phone-btn" onclick="phoneInput('8')">8<span>TUV</span></button>
+                <button class="phone-btn" onclick="phoneInput('9')">9<span>WXYZ</span></button>
+                <button class="phone-btn" onclick="phoneInput('*')">*</button>
+                <button class="phone-btn" onclick="phoneInput('0')">0<span>+</span></button>
+                <button class="phone-btn" onclick="phoneInput('#')">#</button>
+            </div>
+            <button class="call-btn green" onclick="makeCall()"><i class="fa-solid fa-phone"></i></button>
+        </div>
+    </div>
+
+    <!-- ==================== PESAN APP ==================== -->
+    <div class="app-screen" id="app-pesan">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('pesan')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Pesan</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div class="chat-list">
+                <div class="chat-item">
+                    <div class="chat-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="chat-info">
+                        <div class="chat-name">Rizky Developer</div>
+                        <div class="chat-preview">Build AuroraOS-nya berhasil! 🔥</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div>14:30</div>
+                        <span class="chat-badge">2</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <div class="chat-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="chat-info">
+                        <div class="chat-name">Grup Developer ID</div>
+                        <div class="chat-preview">Alex: Kapan ROM baru?</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div>Kemarin</div>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <div class="chat-avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"><i class="fa-brands fa-telegram"></i></div>
+                    <div class="chat-info">
+                        <div class="chat-name">Channel AuroraOS</div>
+                        <div class="chat-preview">AuroraOS v2.0 Beta tersedia!</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div>13:45</div>
+                        <span class="chat-badge">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CHROME APP ==================== -->
+    <div class="app-screen" id="app-chrome">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('chrome')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Chrome</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="background: rgba(255,255,255,0.1); border-radius: 25px; padding: 12px 20px; margin-bottom: 20px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span style="margin-left: 10px; opacity: 0.7;">Cari atau ketik URL</span>
+            </div>
+            <div style="text-align: center; padding: 40px;">
+                <div style="font-size: 60px; margin-bottom: 20px;">🌐</div>
+                <h2 style="font-size: 24px; margin-bottom: 10px;">AuroraOS</h2>
+                <p style="opacity: 0.7;">Custom ROM Android Indonesia</p>
+                <p style="opacity: 0.5; margin-top: 20px; font-size: 14px;">API 37 • Android 17</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== KAMERA APP ==================== -->
+    <div class="app-screen" id="app-kamera">
+        <div class="app-header" style="background: transparent;">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('kamera')" style="color: white;"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title" style="color: white;">Kamera</span>
+            </div>
+        </div>
+        <div class="app-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a1a2e, #2d1f4e);">
+            <div style="width: 100%; aspect-ratio: 9/16; max-height: 400px; background: #000; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+                <i class="fa-solid fa-camera" style="font-size: 80px; opacity: 0.3;"></i>
+            </div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; border: 3px solid white;"></div>
+                <button style="width: 70px; height: 70px; border-radius: 50%; background: white; border: none; cursor: pointer;" onclick="capturePhoto()"></button>
+                <div style="width: 50px; height: 50px; border-radius: 10px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-heart" style="font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PENGATURAN APP ==================== -->
+    <div class="app-screen" id="app-pengaturan">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('pengaturan')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Pengaturan</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div class="settings-section">
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: var(--aurora-primary);"><i class="fa-solid fa-user"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Aurora User</div>
+                        <div class="settings-subtitle">aurora@device.com</div>
+                    </div>
+                </div>
+                <div class="settings-item" onclick="toggleSetting('wifi')">
+                    <div class="settings-icon" style="background: #3b82f6;"><i class="fa-solid fa-wifi"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Wi-Fi</div>
+                        <div class="settings-subtitle">Terhubung ke Aurora_5G</div>
+                    </div>
+                    <div class="toggle active" id="toggle-wifi"></div>
+                </div>
+                <div class="settings-item" onclick="toggleSetting('bluetooth')">
+                    <div class="settings-icon" style="background: #22c55e;"><i class="fa-brands fa-bluetooth-b"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Bluetooth</div>
+                        <div class="settings-subtitle">Earbuds Pro</div>
+                    </div>
+                    <div class="toggle active"></div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Data Seluler</div>
+                        <div class="settings-subtitle">5G - 2.3 GB digunakan</div>
+                    </div>
+                    <div class="toggle active"></div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: #8b5cf6;"><i class="fa-solid fa-palette"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Tema</div>
+                        <div class="settings-subtitle">Aurora Dark</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: #06b6d4;"><i class="fa-solid fa-wallpaper"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Wallpaper</div>
+                        <div class="settings-subtitle">Aurora Gradient</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GALERI APP ==================== -->
+    <div class="app-screen" id="app-galeri">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('galeri')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Galeri</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <span style="font-weight: 600; border-bottom: 2px solid var(--aurora-primary); padding-bottom: 5px;">Foto</span>
+                <span style="opacity: 0.5;">Video</span>
+                <span style="opacity: 0.5;">Album</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;">
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #a78bfa, #38bdf8); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #a855f7, #ec4899); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #00d9a5, #4f8fff); border-radius: 5px;"></div>
+                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #818cf8, #22d3ee); border-radius: 5px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FILES APP ==================== -->
+    <div class="app-screen" id="app-files">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('files')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Files</span>
+                <span style="margin-left: auto; font-size: 12px; opacity: 0.6;">89GB / 128GB</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div class="settings-section">
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-folder"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">DCIM</div>
+                        <div class="settings-subtitle">6 item</div>
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-folder"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Downloads</div>
+                        <div class="settings-subtitle">12 item - 256 MB</div>
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-icon" style="background: #f59e0b;"><i class="fa-solid fa-folder"></i></div>
+                    <div class="settings-info">
+                        <div class="settings-title">Documents</div>
+                        <div class="settings-subtitle">3 item - 12 MB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== YOUTUBE APP ==================== -->
+    <div class="app-screen" id="app-youtube">
+        <div class="app-header">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('youtube')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">YouTube</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="text-align: center; padding: 40px;">
+                <div style="font-size: 80px; margin-bottom: 20px;">▶️</div>
+                <h2 style="font-size: 24px; margin-bottom: 10px;">YouTube</h2>
+                <p style="opacity: 0.7;">Video & Musik</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">Toast Message</div>
+
+<script>
+// Update time
+function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const timeStr = `${hours}:${minutes}`;
+    
+    document.getElementById('status-time').textContent = timeStr;
+    document.getElementById('main-time').textContent = timeStr;
+    
+    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    const dateStr = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+    document.getElementById('main-date').textContent = dateStr;
+}
+
+updateTime();
+setInterval(updateTime, 1000);
+
+// Quick Settings
+function toggleQS(show) {
+    const panel = document.getElementById('qs-panel');
+    if (show) {
+        panel.classList.add('active');
+    } else {
+        panel.classList.remove('active');
+    }
+}
+
+function toggleTile(el) {
+    el.classList.toggle('active');
+    const icon = el.querySelector('i');
+    showToast(el.querySelector('span').textContent + (el.classList.contains('active') ? ' Nyala' : ' Mati'));
+}
+
+// Touch events for QS
+let startY = 0;
+document.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+});
+
+document.addEventListener('touchend', (e) => {
+    const endY = e.changedTouches[0].clientY;
+    if (startY < 50 && endY > 150) {
+        toggleQS(true);
+    } else if (startY > 100 && endY < 50) {
+        toggleQS(false);
+    }
+});
+
+// Keyboard
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'm' || e.key === 'M') toggleQS(true);
+    if (e.key === 'Escape') toggleQS(false);
+});
+
+// Apps
+function openApp(appId) {
+    const appMap = {
+        'telepon': 'app-telepon',
+        'pesan': 'app-pesan',
+        'chrome': 'app-chrome',
+        'kamera': 'app-kamera',
+        'pengaturan': 'app-pengaturan',
+        'galeri': 'app-galeri',
+        'files': 'app-files',
+        'youtube': 'app-youtube',
+        'weather': 'app-weather',
+        'recorder': 'app-recorder',
+        'privacy': 'app-privacy',
+        'accessibility': 'app-accessibility',
+        'castscreen': 'app-castscreen',
+        'battery': 'app-battery',
+        'split': 'app-split',
+        'carkey': 'app-carkey',
+        'androidauto': 'app-androidauto',
+        'health': 'app-health',
+        'smarthome': 'app-smarthome'
+    };
+    const el = document.getElementById(appMap[appId]);
+    if (el) {
+        el.style.display = 'flex';
+        showToast('Membuka ' + appId);
+    }
+}
+
+function closeApp(appId) {
+    const appMap = {
+        'telepon': 'app-telepon',
+        'pesan': 'app-pesan',
+        'chrome': 'app-chrome',
+        'kamera': 'app-kamera',
+        'pengaturan': 'app-pengaturan',
+        'galeri': 'app-galeri',
+        'files': 'app-files',
+        'youtube': 'app-youtube',
+        'weather': 'app-weather',
+        'recorder': 'app-recorder',
+        'privacy': 'app-privacy',
+        'accessibility': 'app-accessibility',
+        'castscreen': 'app-castscreen',
+        'battery': 'app-battery',
+        'split': 'app-split',
+        'carkey': 'app-carkey',
+        'androidauto': 'app-androidauto',
+        'health': 'app-health',
+        'smarthome': 'app-smarthome'
+    };
+    const el = document.getElementById(appMap[appId]);
+    if (el) {
+        el.style.display = 'none';
+    }
+}
+
+// Phone
+let phoneNumber = '+62';
+function phoneInput(num) {
+    phoneNumber += num;
+    document.getElementById('phone-display').textContent = phoneNumber;
+}
+
+function makeCall() {
+    showToast('Memanggil ' + phoneNumber + '...');
+}
+
+// Camera
+function capturePhoto() {
+    showToast('📸 Foto disimpan!');
+}
+
+// Settings toggle
+function toggleSetting(setting) {
+    const toggle = document.querySelector(`#toggle-${setting}`);
+    if (toggle) {
+        toggle.classList.toggle('active');
+        showToast(setting + ' ' + (toggle.classList.contains('active') ? 'aktif' : 'nonaktif'));
+    }
+}
+
+// Toast
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+console.log('AuroraOS UI Demo loaded successfully!');
+
+// Hide loading screen after animation completes
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('loading-screen').classList.add('hide');
+    }, 2800);
+});
+</script>
+
+</body>
+</html>
