@@ -909,6 +909,10 @@
 
 
     <script>
+        // =============================================
+        // AURORAOS UI DEMO - COMPLETE UX/UI SCRIPT
+        // =============================================
+        
         // Inisialisasi elemen DOM
         const qsPanel = document.getElementById('qs-panel');
         const homescreen = document.getElementById('homescreen');
@@ -916,22 +920,29 @@
         const statusBar = document.getElementById('status-bar');
         
         let isQsOpen = false;
+        let isDragging = false;
+        let startY = 0;
+        let currentY = 0;
+        let swipeStartX = 0;
+        let swipeStartY = 0;
 
-
-        // Update Waktu
+        // =============================================
+        // REAL-TIME CLOCK WITH SECONDS
+        // =============================================
         function updateTime() {
             const now = new Date();
             let hours = now.getHours();
             let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
             
             // Format 24h dengan leading zero
             hours = hours < 10 ? '0' + hours : hours;
             minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
             const timeString = `${hours}:${minutes}`;
             
             document.getElementById('sb-time').textContent = timeString;
             document.getElementById('main-time').textContent = timeString;
-
 
             // Format Tanggal
             const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
@@ -940,113 +951,114 @@
             const dateString = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
             document.getElementById('main-date').textContent = dateString;
             document.getElementById('qs-date').textContent = dateString;
+            
+            // Update progress bar animation
+            updateMediaProgress();
         }
-
 
         setInterval(updateTime, 1000);
         updateTime();
 
-
-        // Logika Tarik (Swipe Down/Up) untuk Quick Settings
-        let startY = 0;
-        let currentY = 0;
-        let isDragging = false;
-
-
-        // Mouse Events untuk Desktop (Simulasi Touch)
+        // =============================================
+        // SWIPE GESTURE FOR QUICK SETTINGS
+        // =============================================
         pullArea.addEventListener('mousedown', startDrag);
+        pullArea.addEventListener('touchstart', (e) => {
+            startDrag(e.touches[0]);
+        });
+
         document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', (e) => {
+            drag(e.touches[0]);
+        });
+
         document.addEventListener('mouseup', endDrag);
-
-
-        // Touch Events untuk Mobile
-        pullArea.addEventListener('touchstart', (e) => startDrag(e.touches[0]));
-        document.addEventListener('touchmove', (e) => drag(e.touches[0]));
         document.addEventListener('touchend', endDrag);
 
+        // Double tap on status bar to open QS
+        let lastTap = 0;
+        statusBar.addEventListener('click', () => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 300 && tapLength > 0) {
+                toggleQS(true);
+            }
+            lastTap = currentTime;
+        });
 
-        // Jika layar di-klik saat QS terbuka, tutup QS
-        homescreen.addEventListener('click', () => {
-            if (isQsOpen) toggleQS(false);
+        // Click on homescreen to close QS
+        homescreen.addEventListener('click', (e) => {
+            if (isQsOpen && !e.target.closest('.app-icon-wrapper')) {
+                toggleQS(false);
+            }
         });
         
-        // Atur agar nav-bar bisa menutup QS
         document.querySelector('.nav-bar').addEventListener('click', () => {
-             if (isQsOpen) toggleQS(false);
+            if (isQsOpen) toggleQS(false);
         });
-
 
         function startDrag(e) {
             isDragging = true;
             startY = e.clientY;
-            qsPanel.style.transition = 'none'; // Matikan transisi saat drag agar responsif
+            swipeStartX = e.clientX;
+            swipeStartY = e.clientY;
+            qsPanel.style.transition = 'none';
         }
-
 
         function drag(e) {
             if (!isDragging) return;
             
             currentY = e.clientY - startY;
+            const deltaX = e.clientX - swipeStartX;
             
             if (!isQsOpen) {
-                // Menarik ke bawah (membuka)
                 if (currentY > 0) {
-                    // Batasi gerakan maksimal
                     let translateY = Math.min(currentY, qsPanel.offsetHeight) - qsPanel.offsetHeight;
                     qsPanel.style.transform = `translateY(${translateY}px)`;
                     
-                    // Efek blur pada homescreen seiring ditarik
                     let blurValue = Math.min(currentY / qsPanel.offsetHeight * 10, 10);
                     let scaleValue = Math.max(1 - (currentY / qsPanel.offsetHeight * 0.05), 0.95);
-                    homescreen.style.filter = `blur(${blurValue}px) brightness(${1 - (currentY/qsPanel.offsetHeight * 0.3)})`;
+                    let opacity = Math.max(1 - (currentY / qsPanel.offsetHeight * 0.3), 0.7);
+                    homescreen.style.filter = `blur(${blurValue}px) brightness(${opacity})`;
                     homescreen.style.transform = `scale(${scaleValue})`;
                 }
             } else {
-                // Menarik ke atas (menutup)
                 if (currentY < 0) {
                     qsPanel.style.transform = `translateY(${currentY}px)`;
                     
-                    // Kurangi blur seiring didorong ke atas
                     let progress = Math.abs(currentY) / qsPanel.offsetHeight;
                     let blurValue = 10 - (progress * 10);
                     let scaleValue = 0.95 + (progress * 0.05);
-                    homescreen.style.filter = `blur(${blurValue}px) brightness(${0.7 + (progress * 0.3)})`;
+                    let opacity = 0.7 + (progress * 0.3);
+                    homescreen.style.filter = `blur(${blurValue}px) brightness(${opacity})`;
                     homescreen.style.transform = `scale(${scaleValue})`;
                 }
             }
         }
-
 
         function endDrag() {
             if (!isDragging) return;
             isDragging = false;
             
-            // Kembalikan transisi CSS
             qsPanel.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
-            qsPanel.style.transform = ''; // Hapus inline transform
+            qsPanel.style.transform = '';
             homescreen.style.filter = '';
             homescreen.style.transform = '';
 
-
-            // Tentukan apakah harus buka atau tutup berdasarkan jarak tarikan
             if (!isQsOpen && currentY > 50) {
                 toggleQS(true);
             } else if (isQsOpen && currentY < -50) {
                 toggleQS(false);
+            } else if (isQsOpen) {
+                qsPanel.classList.add('open');
+                homescreen.classList.add('blur');
             } else {
-                // Snap kembali ke state semula jika tarikan tidak cukup
-                if (isQsOpen) {
-                    qsPanel.classList.add('open');
-                    homescreen.classList.add('blur');
-                } else {
-                    qsPanel.classList.remove('open');
-                    homescreen.classList.remove('blur');
-                }
+                qsPanel.classList.remove('open');
+                homescreen.classList.remove('blur');
             }
             
             currentY = 0;
         }
-
 
         function toggleQS(forceOpen) {
             isQsOpen = forceOpen !== undefined ? forceOpen : !isQsOpen;
@@ -1054,22 +1066,43 @@
             if (isQsOpen) {
                 qsPanel.classList.add('open');
                 homescreen.classList.add('blur');
-                // Sembunyikan hint demo jika QS dibuka
                 document.querySelector('.demo-hint').style.display = 'none';
+                // Add haptic feedback simulation
+                addRippleEffect();
             } else {
                 qsPanel.classList.remove('open');
                 homescreen.classList.remove('blur');
             }
         }
 
+        // =============================================
+        // RIPPLE EFFECT FOR TOUCH FEEDBACK
+        // =============================================
+        function addRippleEffect() {
+            const device = document.getElementById('device');
+            device.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                device.style.transform = '';
+                device.style.transition = 'transform 0.3s ease';
+            }, 100);
+        }
 
-        // Interaksi Quick Settings Tiles
+        // =============================================
+        // QUICK SETTINGS TILES INTERACTIONS
+        // =============================================
         const tiles = document.querySelectorAll('.qs-tile');
         tiles.forEach(tile => {
-            tile.addEventListener('click', function() {
+            tile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+                
                 this.classList.toggle('active');
                 
-                // Ubah teks subtitle berdasarkan state
                 const subtitle = this.querySelector('.qs-tile-subtitle');
                 const title = this.querySelector('.qs-tile-title').textContent;
                 
@@ -1077,8 +1110,18 @@
                     if(title === 'Internet') subtitle.textContent = 'Aurora_5G';
                     if(title === 'Bluetooth') subtitle.textContent = 'Earbuds Pro';
                     if(title === 'Jangan Ganggu') subtitle.textContent = 'Nyala';
-                    if(title === 'Senter') subtitle.textContent = 'Nyala';
-                    if(title === 'Mode Pesawat') subtitle.textContent = 'Nyala';
+                    if(title === 'Senter') {
+                        subtitle.textContent = 'Nyala';
+                        // Visual feedback - flash effect
+                        document.querySelector('.wallpaper').style.filter = 'brightness(1.3)';
+                        setTimeout(() => {
+                            document.querySelector('.wallpaper').style.filter = '';
+                        }, 200);
+                    }
+                    if(title === 'Mode Pesawat') {
+                        subtitle.textContent = 'Nyala';
+                        document.getElementById('airplane-icon').style.display = 'block';
+                    }
                     if(title === 'Lokasi') subtitle.textContent = 'Nyala';
                     if(title === 'Hotspot') subtitle.textContent = 'Aurora_Share';
                     if(title === 'Penghemat Baterai') subtitle.textContent = 'Nyala';
@@ -1086,61 +1129,296 @@
                     if(title === 'Mode Gelap') subtitle.textContent = 'Nyala';
                     if(title === 'NFC') subtitle.textContent = 'Nyala';
                     if(title === 'VPN') subtitle.textContent = 'Aurora Secure';
+                    if(title === 'Night Light') subtitle.textContent = 'Nyala';
+                    if(title === 'Cast') subtitle.textContent = 'Searching...';
+                    if(title === 'Focus') subtitle.textContent = 'Nyala';
                 } else {
-                    subtitle.textContent = 'Mati';
+                    if(title === 'Mode Pesawat') {
+                        subtitle.textContent = 'Mati';
+                        document.getElementById('airplane-icon').style.display = 'none';
+                    }
+                    if(title === 'Hotspot') subtitle.textContent = 'Mati';
+                    else subtitle.textContent = 'Mati';
                 }
+                
+                // Show toast notification
+                showToast(title + ' ' + (this.classList.contains('active') ? 'diaktifkan' : 'dinonaktifkan'));
+            });
+            
+            // Long press for more options
+            let pressTimer;
+            tile.addEventListener('touchstart', () => {
+                pressTimer = setTimeout(() => {
+                    showToast('Pengaturan lanjutan untuk ' + tile.querySelector('.qs-tile-title').textContent);
+                }, 500);
+            });
+            tile.addEventListener('touchend', () => {
+                clearTimeout(pressTimer);
             });
         });
 
-
-        // Interaksi Media Player
+        // =============================================
+        // MEDIA PLAYER WITH FULL CONTROLS
+        // =============================================
         const playBtn = document.getElementById('play-btn');
         let isPlaying = true;
+        let currentProgress = 40; // percentage
+        let progressInterval;
         
-        playBtn.addEventListener('click', () => {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             isPlaying = !isPlaying;
             const icon = playBtn.querySelector('i');
             
             if (isPlaying) {
                 icon.classList.remove('fa-play');
-                icon.classList.remove('ml-1'); // Hapus offset play icon
                 icon.classList.add('fa-pause');
+                startProgressAnimation();
+                showToast('Memutar: Starlight');
             } else {
                 icon.classList.remove('fa-pause');
                 icon.classList.add('fa-play');
-                icon.classList.add('ml-1');
+                stopProgressAnimation();
+                showToast('Jeda');
             }
         });
 
+        // Shuffle and Repeat buttons
+        const shuffleBtn = document.querySelector('.fa-shuffle');
+        const repeatBtn = document.querySelector('.fa-repeat');
+        let isShuffleOn = false;
+        let isRepeatOn = false;
 
-        // Interaksi Notifikasi (Swipe untuk menghapus - simulasi sederhana)
+        shuffleBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isShuffleOn = !isShuffleOn;
+            shuffleBtn.style.color = isShuffleOn ? 'var(--aurora-primary)' : 'white';
+            showToast(isShuffleOn ? 'Shuffle nyala' : 'Shuffle mati');
+        });
+
+        repeatBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isRepeatOn = !isRepeatOn;
+            repeatBtn.style.color = isRepeatOn ? 'var(--aurora-primary)' : 'white';
+            showToast(isRepeatOn ? 'Repeat nyala' : 'Repeat mati');
+        });
+
+        function updateMediaProgress() {
+            if (isPlaying) {
+                currentProgress += 0.1;
+                if (currentProgress > 100) currentProgress = 0;
+            }
+            const progressBar = document.querySelector('.media-player .h-full');
+            if (progressBar) {
+                progressBar.style.width = currentProgress + '%';
+            }
+            const timeDisplay = document.querySelector('.media-player .flex.justify-between span:first-child');
+            if (timeDisplay && isPlaying) {
+                const seconds = Math.floor(currentProgress * 2.22); // Approx based on 3:42 total
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timeDisplay.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+        }
+
+        function startProgressAnimation() {
+            stopProgressAnimation();
+            progressInterval = setInterval(() => {
+                updateMediaProgress();
+            }, 100);
+        }
+
+        function stopProgressAnimation() {
+            clearInterval(progressInterval);
+        }
+
+        startProgressAnimation();
+
+        // =============================================
+        // NOTIFICATIONS WITH SWIPE TO DISMISS
+        // =============================================
         const notifications = document.querySelectorAll('.notification-card');
         notifications.forEach(notif => {
-            notif.addEventListener('click', function() {
-                // Animasi sederhana sebelum menghapus
-                this.style.transform = 'translateX(100%)';
-                this.style.opacity = '0';
-                setTimeout(() => {
-                    this.style.display = 'none';
-                }, 200);
+            let startX = 0;
+            let startY = 0;
+            let currentX = 0;
+            
+            notif.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            });
+            
+            notif.addEventListener('touchmove', (e) => {
+                currentX = e.touches[0].clientX - startX;
+                const deltaY = Math.abs(e.touches[0].clientY - startY);
+                
+                if (Math.abs(currentX) > deltaY && currentX < 0) {
+                    e.preventDefault();
+                    notif.style.transform = `translateX(${currentX}px)`;
+                    notif.style.opacity = 1 + (currentX / 300);
+                }
+            });
+            
+            notif.addEventListener('touchend', () => {
+                if (currentX < -100) {
+                    // Swipe left to dismiss
+                    notif.style.transform = 'translateX(-100%)';
+                    notif.style.opacity = '0';
+                    setTimeout(() => {
+                        notif.style.display = 'none';
+                        showToast('Notifikasi dihapus');
+                    }, 200);
+                } else {
+                    // Snap back
+                    notif.style.transform = '';
+                    notif.style.opacity = '';
+                }
+                currentX = 0;
+            });
+            
+            // Click to expand/view
+            notif.addEventListener('click', () => {
+                if (Math.abs(currentX) < 10) {
+                    showToast('Membuka: ' + notif.querySelector('.notif-title').textContent);
+                }
             });
         });
 
+        // =============================================
+        // APP ICONS INTERACTIONS
+        // =============================================
+        const appIcons = document.querySelectorAll('.app-icon-wrapper');
+        appIcons.forEach(app => {
+            app.addEventListener('click', () => {
+                const appName = app.querySelector('.app-label').textContent;
+                showToast('Membuka: ' + appName);
+                
+                // Add bounce animation
+                app.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    app.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        app.style.transform = '';
+                    }, 100);
+                }, 100);
+            });
+        });
 
-        // Fitur Ekstra: Mengubah warna tema ("Monet" engine simulation)
+        // =============================================
+        // TOAST NOTIFICATIONS
+        // =============================================
+        function showToast(message) {
+            // Remove existing toast
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.innerHTML = `
+                <div style="
+                    position: fixed;
+                    bottom: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    backdrop-filter: blur(10px);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 30px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    z-index: 1000;
+                    animation: toastIn 0.3s ease, toastOut 0.3s ease 2s forwards;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                ">
+                    ${message}
+                </div>
+                <style>
+                    @keyframes toastIn {
+                        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    }
+                    @keyframes toastOut {
+                        from { opacity: 1; transform: translateX(-50%) translateY(0); }
+                        to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                    }
+                </style>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
+        }
+
+        // =============================================
+        // THEME COLOR SWITCHER (MATERIAL YOU)
+        // =============================================
         const themes = [
-            { primary: '#8b5cf6', secondary: '#0ea5e9' }, // Ungu - Biru
-            { primary: '#f43f5e', secondary: '#f59e0b' }, // Merah muda - Oranye
-            { primary: '#10b981', secondary: '#3b82f6' }  // Hijau - Biru
+            { primary: '#8b5cf6', secondary: '#0ea5e9', name: 'Ungu' },
+            { primary: '#f43f5e', secondary: '#f59e0b', name: 'Merah' },
+            { primary: '#10b981', secondary: '#3b82f6', name: 'Hijau' },
+            { primary: '#06b6d4', secondary: '#8b5cf6', name: 'Cyan' },
+            { primary: '#f97316', secondary: '#ef4444', name: 'Oranye' }
         ];
         let currentTheme = 0;
 
-
         function toggleThemeColor() {
             currentTheme = (currentTheme + 1) % themes.length;
-            document.documentElement.style.setProperty('--aurora-primary', themes[currentTheme].primary);
-            document.documentElement.style.setProperty('--aurora-secondary', themes[currentTheme].secondary);
+            const theme = themes[currentTheme];
+            document.documentElement.style.setProperty('--aurora-primary', theme.primary);
+            document.documentElement.style.setProperty('--aurora-secondary', theme.secondary);
+            showToast('Tema: ' + theme.name);
         }
+
+        // =============================================
+        // BRIGHTNESS SLIDER
+        // =============================================
+        const brightnessSlider = document.getElementById('brightness-slider');
+        brightnessSlider?.addEventListener('input', (e) => {
+            const brightness = e.target.value;
+            document.querySelector('.wallpaper').style.filter = `brightness(${brightness / 100 + 0.3})`;
+        });
+
+        // =============================================
+        // SEARCH BAR INTERACTION
+        // =============================================
+        const searchPill = document.querySelector('.bg-white\\/20');
+        searchPill?.addEventListener('click', () => {
+            showToast('Membuka Google Search...');
+        });
+
+        // =============================================
+        // POWER BUTTON INTERACTION
+        // =============================================
+        const powerBtn = document.querySelector('.fa-power-off');
+        powerBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showToast('Tekan lama untuk matikan...');
+        });
+
+        // =============================================
+        // KEYBOARD SHORTCUTS FOR DESKTOP
+        // =============================================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isQsOpen) {
+                toggleQS(false);
+            }
+            if (e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                playBtn?.click();
+            }
+            if (e.key === 'm' || e.key === 'M') {
+                toggleQS(true);
+            }
+        });
+
+        // =============================================
+        // INIT
+        // =============================================
+        console.log('AuroraOS UI Demo loaded successfully!');
     </script>
 </body>
 </html>
