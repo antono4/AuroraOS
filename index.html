@@ -1249,9 +1249,319 @@
 
         /* Hide system UI when app is open */
         .app-screen ~ .system-ui,
-        .incoming-call-screen ~ .system-ui {
+        .incoming-call-screen ~ .system-ui,
+        .active-call-screen ~ .system-ui {
             display: none;
         }
+
+        /* ==================== ACTIVE CALL SCREEN ==================== */
+        .active-call-screen {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1f4e 100%);
+            z-index: 70;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 20px 30px;
+        }
+
+        .active-call-content {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .caller-avatar-large {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--aurora-primary), var(--aurora-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            color: white;
+            margin: 0 auto 25px;
+        }
+
+        .caller-name-lg {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .call-timer {
+            font-size: 24px;
+            color: var(--aurora-primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .call-status-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .active-call-actions {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .call-action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .call-action-item span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .call-action-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .call-action-btn:hover { background: rgba(255,255,255,0.2); }
+        .call-action-btn.active { background: var(--aurora-primary); }
+
+        .end-call-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #ef4444;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .end-call-btn:hover { transform: scale(1.1); }
+
+        /* ==================== SETTINGS APP ==================== */
+        .settings-app {
+            background: #1a1a2e;
+            padding: 0;
+        }
+
+        .settings-section {
+            padding: 15px;
+        }
+
+        .settings-group {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .settings-group-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .settings-item:hover { background: rgba(255,255,255,0.05); }
+        .settings-item:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        .settings-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        .settings-info { flex: 1; }
+        .settings-title { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+        .settings-subtitle { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+        .settings-item > i:last-child {
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+        }
+
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 28px;
+            transition: 0.3s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--aurora-primary);
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        /* ==================== GALLERY APP ==================== */
+        .gallery-app {
+            background: #1a1a2e;
+            padding: 0;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            gap: 20px;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .gallery-tab {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            cursor: pointer;
+            padding-bottom: 5px;
+        }
+
+        .gallery-tab.active {
+            color: white;
+            font-weight: 600;
+            border-bottom: 2px solid var(--aurora-primary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            padding: 3px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:active .gallery-placeholder { transform: scale(0.95); }
+
+        /* ==================== FILE MANAGER APP ==================== */
+        .files-app {
+            background: #1a1a2e;
+            padding: 0;
+        }
+
+        .storage-indicator {
+            margin-left: auto;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+        }
+
+        .files-path {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .files-path i { color: var(--aurora-primary); }
+
+        .files-list {
+            padding: 10px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .file-item:hover { background: rgba(255,255,255,0.05); }
+
+        .file-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .file-icon.folder { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .file-icon.zip { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .file-icon.txt { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .file-icon.md { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .file-info { flex: 1; }
+        .file-name { font-weight: 500; font-size: 14px; margin-bottom: 3px; }
+        .file-meta { font-size: 12px; color: rgba(255,255,255,0.5); }
     </style>
 </head>
 <body>
@@ -1542,6 +1852,251 @@
                 <button class="call-btn accept" onclick="acceptCall()">
                     <i class="fa-solid fa-phone"></i>
                 </button>
+            </div>
+        </div>
+
+        <!-- ==================== ACTIVE CALL SCREEN ==================== -->
+        <div class="active-call-screen" id="active-call" style="display: none;">
+            <div class="call-wallpaper"></div>
+            <div class="active-call-content">
+                <div class="caller-avatar-large">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="caller-name-lg">Rizky Developer</div>
+                <div class="call-timer" id="call-timer">00:00</div>
+                <div class="call-status-text">Terhubung</div>
+            </div>
+            <div class="active-call-actions">
+                <div class="call-action-item">
+                    <button class="call-action-btn" onclick="toggleMute()"><i class="fa-solid fa-microphone-slash" id="mute-icon"></i></button>
+                    <span id="mute-text">Bisukan</span>
+                </div>
+                <div class="call-action-item">
+                    <button class="call-action-btn" onclick="toggleSpeaker()"><i class="fa-solid fa-volume-high" id="speaker-icon"></i></button>
+                    <span id="speaker-text">Speaker</span>
+                </div>
+                <div class="call-action-item">
+                    <button class="call-action-btn" onclick="openKeypadCall()"><i class="fa-solid fa-keyboard"></i></button>
+                    <span>Keypad</span>
+                </div>
+                <div class="call-action-item">
+                    <button class="call-action-btn" onclick="toggleVideoCall()"><i class="fa-solid fa-video" id="video-icon"></i></button>
+                    <span>Video</span>
+                </div>
+            </div>
+            <button class="end-call-btn" onclick="endCall()">
+                <i class="fa-solid fa-phone-slash"></i>
+            </button>
+        </div>
+
+        <!-- ==================== SETTINGS APP ==================== -->
+        <div class="app-screen" id="app-settings" style="display: none;">
+            <div class="app-header">
+                <div class="app-nav">
+                    <button class="app-back" onclick="closeApp('settings')"><i class="fa-solid fa-arrow-left"></i></button>
+                    <span class="app-title">Pengaturan</span>
+                </div>
+            </div>
+            <div class="app-content settings-app">
+                <div class="settings-section">
+                    <div class="settings-group">
+                        <div class="settings-item" onclick="showToast('Profil pengguna')">
+                            <div class="settings-icon" style="background: var(--aurora-primary);"><i class="fa-solid fa-user"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Aurora User</div>
+                                <div class="settings-subtitle">aurora@device.com</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <div class="settings-group-title">Koneksi</div>
+                    <div class="settings-group">
+                        <div class="settings-item" onclick="toggleSetting('wifi')">
+                            <div class="settings-icon" style="background: #3b82f6;"><i class="fa-solid fa-wifi"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Wi-Fi</div>
+                                <div class="settings-subtitle">Aurora_5G</div>
+                            </div>
+                            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="settings-item" onclick="toggleSetting('bluetooth')">
+                            <div class="settings-icon" style="background: #10b981;"><i class="fa-brands fa-bluetooth-b"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Bluetooth</div>
+                                <div class="settings-subtitle">Earbuds Pro</div>
+                            </div>
+                            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="settings-item" onclick="toggleSetting('data')">
+                            <div class="settings-icon" style="background: #f97316;"><i class="fa-solid fa-mobile-screen"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Data Seluler</div>
+                                <div class="settings-subtitle">5G - Penggunaan: 2.3 GB</div>
+                            </div>
+                            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="settings-group-title">Tampilan</div>
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #8b5cf6;"><i class="fa-solid fa-palette"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Tema</div>
+                                <div class="settings-subtitle">Aurora Dark</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #06b6d4;"><i class="fa-solid fa-wallpaper"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Wallpaper</div>
+                                <div class="settings-subtitle">Aurora Gradient</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #f43f5e;"><i class="fa-solid fa-moon"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Mode Gelap</div>
+                                <div class="settings-subtitle">Aktif</div>
+                            </div>
+                            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="settings-group-title">Aplikasi</div>
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #22c55e;"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Privasi & Keamanan</div>
+                                <div class="settings-subtitle">Update terakhir: Hari ini</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #eab308;"><i class="fa-solid fa-bell"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Notifikasi</div>
+                                <div class="settings-subtitle">3 aplikasi dibisukan</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #64748b;"><i class="fa-solid fa-memory"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Memori & Penyimpanan</div>
+                                <div class="settings-subtitle">128GB, 89GB digunakan</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <div class="settings-group-title">Sistem</div>
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #6366f1;"><i class="fa-solid fa-robot"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Tentang Ponsel</div>
+                                <div class="settings-subtitle">AuroraOS 2.0 - Android 17</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="settings-item">
+                            <div class="settings-icon" style="background: #84cc16;"><i class="fa-solid fa-code"></i></div>
+                            <div class="settings-info">
+                                <div class="settings-title">Info Software</div>
+                                <div class="settings-subtitle">API 37 - Build 2026.07.14</div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GALLERY APP ==================== -->
+        <div class="app-screen" id="app-gallery" style="display: none;">
+            <div class="app-header">
+                <div class="app-nav">
+                    <button class="app-back" onclick="closeApp('gallery')"><i class="fa-solid fa-arrow-left"></i></button>
+                    <span class="app-title">Galeri</span>
+                </div>
+            </div>
+            <div class="app-content gallery-app">
+                <div class="gallery-tabs">
+                    <span class="gallery-tab active">Foto</span>
+                    <span class="gallery-tab">Video</span>
+                    <span class="gallery-tab">Album</span>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="showToast('📷 IMG_001 - Aurora Sunset')"><div class="gallery-placeholder" style="background: linear-gradient(135deg, #ff6b6b, #ffd93d);"></div></div>
+                    <div class="gallery-item" onclick="showToast('📷 IMG_002 - Device Preview')"><div class="gallery-placeholder" style="background: linear-gradient(135deg, #4facfe, #00f2fe);"></div></div>
+                    <div class="gallery-item" onclick="showToast('📷 IMG_003 - AuroraOS UI')"><div class="gallery-placeholder" style="background: linear-gradient(135deg, #a855f7, #ec4899);"></div></div>
+                    <div class="gallery-item" onclick="showToast('📷 IMG_004 - Night Mode')"><div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div></div>
+                    <div class="gallery-item" onclick="showToast('📷 IMG_005 - Material You')"><div class="gallery-placeholder" style="background: linear-gradient(135deg, #00d9a5, #4f8fff);"></div></div>
+                    <div class="gallery-item" onclick="showToast('📷 IMG_006 - Custom ROM')"><div class="gallery-placeholder" style="background: linear-gradient(135deg, #ff8a50, #ff6b9d);"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FILE MANAGER APP ==================== -->
+        <div class="app-screen" id="app-files" style="display: none;">
+            <div class="app-header">
+                <div class="app-nav">
+                    <button class="app-back" onclick="closeApp('files')"><i class="fa-solid fa-arrow-left"></i></button>
+                    <span class="app-title">Files</span>
+                    <div class="storage-indicator">
+                        <span>89GB / 128GB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="app-content files-app">
+                <div class="files-path">
+                    <i class="fa-solid fa-folder"></i> Penyimpanan Internal
+                </div>
+                <div class="files-list">
+                    <div class="file-item" onclick="showToast('Membuka DCIM')">
+                        <div class="file-icon folder"><i class="fa-solid fa-folder"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">DCIM</div>
+                            <div class="file-meta">6 item</div>
+                        </div>
+                    </div>
+                    <div class="file-item" onclick="showToast('Membuka Downloads')">
+                        <div class="file-icon folder"><i class="fa-solid fa-folder"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">Downloads</div>
+                            <div class="file-meta">12 item - 256 MB</div>
+                        </div>
+                    </div>
+                    <div class="file-item" onclick="showToast('Membuka Documents')">
+                        <div class="file-icon folder"><i class="fa-solid fa-folder"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">Documents</div>
+                            <div class="file-meta">3 item - 12 MB</div>
+                        </div>
+                    </div>
+                    <div class="file-item" onclick="showToast('📄 AuroraOS-v2.0.zip')">
+                        <div class="file-icon zip"><i class="fa-solid fa-file-zipper"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">AuroraOS-v2.0.zip</div>
+                            <div class="file-meta">2.1 GB - 14 Jul 2026</div>
+                        </div>
+                    </div>
+                    <div class="file-item" onclick="showToast('📄 project_notes.txt')">
+                        <div class="file-icon txt"><i class="fa-solid fa-file-lines"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">project_notes.txt</div>
+                            <div class="file-meta">4 KB - 13 Jul 2026</div>
+                        </div>
+                    </div>
+                    <div class="file-item" onclick="showToast('📄 README.md')">
+                        <div class="file-icon md"><i class="fa-brands fa-markdown"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">README.md</div>
+                            <div class="file-meta">8 KB - 14 Jul 2026</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -2304,6 +2859,10 @@
         // APP FUNCTIONS
         // =============================================
         let phoneNumber = '+62';
+        let callTimer = null;
+        let callSeconds = 0;
+        let isMuted = false;
+        let isSpeakerOn = false;
         
         function openApp(appName) {
             const appMap = {
@@ -2313,10 +2872,10 @@
                 'Browser': 'app-browser',
                 'Kamera': 'app-kamera',
                 'WhatsApp': 'app-pesan',
-                'Instagram': 'app-kamera',
+                'Instagram': 'app-gallery',
                 'Twitter': 'app-search',
                 'YouTube': 'app-browser',
-                'Files': 'app-browser'
+                'Files': 'app-files'
             };
             
             const appId = appMap[appName];
@@ -2331,7 +2890,10 @@
                 'pesan': 'app-pesan',
                 'browser': 'app-browser',
                 'kamera': 'app-kamera',
-                'search': 'app-search'
+                'search': 'app-search',
+                'settings': 'app-settings',
+                'gallery': 'app-gallery',
+                'files': 'app-files'
             };
             
             const appId = appMap[appName];
@@ -2350,7 +2912,6 @@
             phoneNumber += num;
             document.getElementById('phone-display').textContent = phoneNumber;
             
-            // Add haptic feedback
             const display = document.getElementById('phone-display');
             display.style.transform = 'scale(1.05)';
             setTimeout(() => display.style.transform = '', 100);
@@ -2360,7 +2921,7 @@
             showToast('Memanggil ' + phoneNumber + '...');
             setTimeout(() => {
                 document.getElementById('incoming-call').style.display = 'flex';
-            }, 1000);
+            }, 1500);
         }
 
         function showCallSim() {
@@ -2369,12 +2930,76 @@
 
         function acceptCall() {
             document.getElementById('incoming-call').style.display = 'none';
+            document.getElementById('active-call').style.display = 'flex';
             showToast('Panggilan terhubung!');
+            startCallTimer();
         }
 
         function endCall() {
+            stopCallTimer();
             document.getElementById('incoming-call').style.display = 'none';
+            document.getElementById('active-call').style.display = 'none';
             showToast('Panggilan berakhir');
+            // Reset
+            isMuted = false;
+            isSpeakerOn = false;
+            updateCallButtons();
+        }
+
+        function startCallTimer() {
+            callSeconds = 0;
+            updateTimerDisplay();
+            callTimer = setInterval(() => {
+                callSeconds++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function stopCallTimer() {
+            if (callTimer) {
+                clearInterval(callTimer);
+                callTimer = null;
+            }
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(callSeconds / 60).toString().padStart(2, '0');
+            const secs = (callSeconds % 60).toString().padStart(2, '0');
+            const timerEl = document.getElementById('call-timer');
+            if (timerEl) timerEl.textContent = `${mins}:${secs}`;
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            updateCallButtons();
+            showToast(isMuted ? 'Mikrofon dibisukan' : 'Mikrofon aktif');
+        }
+
+        function toggleSpeaker() {
+            isSpeakerOn = !isSpeakerOn;
+            updateCallButtons();
+            showToast(isSpeakerOn ? 'Speaker nyala' : 'Speaker mati');
+        }
+
+        function toggleVideoCall() {
+            showToast('Video call belum tersedia');
+        }
+
+        function openKeypadCall() {
+            closeApp('settings');
+            openApp('Telepon');
+        }
+
+        function updateCallButtons() {
+            const muteIcon = document.getElementById('mute-icon');
+            const muteText = document.getElementById('mute-text');
+            const speakerIcon = document.getElementById('speaker-icon');
+            const speakerText = document.getElementById('speaker-text');
+            
+            if (muteIcon) muteIcon.className = isMuted ? 'fa-solid fa-microphone' : 'fa-solid fa-microphone-slash';
+            if (muteText) muteText.textContent = isMuted ? 'Aktifkan' : 'Bisukan';
+            if (speakerIcon) speakerIcon.className = isSpeakerOn ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+            if (speakerText) speakerText.textContent = isSpeakerOn ? 'Matikan' : 'Speaker';
         }
 
         // Camera App Function
@@ -2394,6 +3019,11 @@
                 searchInput.value = query;
                 showToast('Mencari: ' + query);
             }
+        }
+
+        // Settings App Function
+        function toggleSetting(setting) {
+            showToast('Pengaturan ' + setting + ' diubah');
         }
 
         // Add slideDown animation
