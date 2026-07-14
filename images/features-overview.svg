@@ -1,53 +1,92 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#0f0c29"/>
       <stop offset="50%" style="stop-color:#1a0a2e"/>
       <stop offset="100%" style="stop-color:#24243e"/>
     </linearGradient>
+    <linearGradient id="auroraGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.5"/>
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="cardGlow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="cardGlow2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
   <!-- Background -->
-  <rect width="600" height="300" fill="url(#bgGrad)"/>
+  <rect width="600" height="320" fill="url(#bgGrad)"/>
   
-  <!-- Title -->
-  <text x="300" y="35" font-family="Arial" font-size="22" font-weight="bold" fill="white" text-anchor="middle">✨ Fitur Utama AuroraOS</text>
+  <!-- Aurora Effect -->
+  <ellipse cx="300" cy="340" rx="400" ry="120" fill="url(#auroraGrad)">
+    <animate attributeName="rx" values="400;420;400" dur="5s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="200" cy="320" rx="150" ry="60" fill="#8b5cf6" opacity="0.15">
+    <animate attributeName="cx" values="200;240;200" dur="7s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="400" cy="310" rx="130" ry="50" fill="#06b6d4" opacity="0.15">
+    <animate attributeName="cx" values="400;360;400" dur="6s" repeatCount="indefinite"/>
+  </ellipse>
   
-  <!-- Feature Cards -->
-  <!-- Privacy -->
-  <rect x="30" y="60" width="165" height="100" rx="15" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="2"/>
-  <text x="112" y="95" font-family="Arial" font-size="32" text-anchor="middle">🔒</text>
-  <text x="112" y="120" font-family="Arial" font-size="14" font-weight="bold" fill="#8b5cf6" text-anchor="middle">Privasi Terdepan</text>
-  <text x="112" y="140" font-family="Arial" font-size="9" fill="#aaa" text-anchor="middle">Kontrol penuh atas data Anda</text>
+  <!-- Header -->
+  <text x="300" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">✨ Fitur Utama AuroraOS</text>
   
-  <!-- Performance -->
-  <rect x="217" y="60" width="165" height="100" rx="15" fill="#1a1a2e" stroke="#06b6d4" stroke-width="2"/>
-  <text x="300" y="95" font-family="Arial" font-size="32" text-anchor="middle">⚡</text>
-  <text x="300" y="120" font-family="Arial" font-size="14" font-weight="bold" fill="#06b6d4" text-anchor="middle">Performa Optimal</text>
-  <text x="300" y="140" font-family="Arial" font-size="9" fill="#aaa" text-anchor="middle">Responsif & hemat baterai</text>
+  <!-- Feature Cards Row 1 -->
+  <!-- Privacy Card -->
+  <rect x="25" y="55" width="170" height="110" rx="16" fill="#1a1a2e" opacity="0.95"/>
+  <rect x="25" y="55" width="170" height="110" rx="16" fill="url(#cardGlow1)"/>
+  <rect x="25" y="55" width="170" height="4" rx="2" fill="#8b5cf6"/>
+  <text x="110" y="100" font-size="40" text-anchor="middle" filter="url(#glow)">🔒</text>
+  <text x="110" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#8b5cf6" text-anchor="middle">Privasi Terdepan</text>
+  <text x="110" y="150" font-family="Arial, sans-serif" font-size="10" fill="#aaa" text-anchor="middle">Kontrol penuh atas data Anda</text>
   
-  <!-- Customization -->
-  <rect x="404" y="60" width="165" height="100" rx="15" fill="#1a1a2e" stroke="#f59e0b" stroke-width="2"/>
-  <text x="486" y="95" font-family="Arial" font-size="32" text-anchor="middle">🎨</text>
-  <text x="486" y="120" font-family="Arial" font-size="14" font-weight="bold" fill="#f59e0b" text-anchor="middle">Kustomisasi Luas</text>
-  <text x="486" y="140" font-family="Arial" font-size="9" fill="#aaa" text-anchor="middle">Personalisasi tanpa batas</text>
+  <!-- Performance Card -->
+  <rect x="215" y="55" width="170" height="110" rx="16" fill="#1a1a2e" opacity="0.95"/>
+  <rect x="215" y="55" width="170" height="110" rx="16" fill="url(#cardGlow2)"/>
+  <rect x="215" y="55" width="170" height="4" rx="2" fill="#06b6d4"/>
+  <text x="300" y="100" font-size="40" text-anchor="middle" filter="url(#glow)">⚡</text>
+  <text x="300" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#06b6d4" text-anchor="middle">Performa Optimal</text>
+  <text x="300" y="150" font-family="Arial, sans-serif" font-size="10" fill="#aaa" text-anchor="middle">Responsif & hemat baterai</text>
   
-  <!-- Bottom Row -->
-  <!-- Languages -->
-  <rect x="30" y="175" width="165" height="100" rx="15" fill="#1a1a2e" stroke="#34a853" stroke-width="2"/>
-  <text x="112" y="210" font-family="Arial" font-size="32" text-anchor="middle">🌏</text>
-  <text x="112" y="235" font-family="Arial" font-size="14" font-weight="bold" fill="#34a853" text-anchor="middle">Multi-Bahasa</text>
-  <text x="112" y="255" font-family="Arial" font-size="9" fill="#aaa" text-anchor="middle">50+ bahasa termasuk Indonesia</text>
+  <!-- Customization Card -->
+  <rect x="405" y="55" width="170" height="110" rx="16" fill="#1a1a2e" opacity="0.95"/>
+  <rect x="405" y="55" width="170" height="4" rx="2" fill="#f59e0b"/>
+  <text x="490" y="100" font-size="40" text-anchor="middle" filter="url(#glow)">🎨</text>
+  <text x="490" y="130" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#f59e0b" text-anchor="middle">Kustomisasi Luas</text>
+  <text x="490" y="150" font-family="Arial, sans-serif" font-size="10" fill="#aaa" text-anchor="middle">Personalisasi tanpa batas</text>
   
-  <!-- Updates -->
-  <rect x="217" y="175" width="165" height="100" rx="15" fill="#1a1a2e" stroke="#ea4335" stroke-width="2"/>
-  <text x="300" y="210" font-family="Arial" font-size="32" text-anchor="middle">🔄</text>
-  <text x="300" y="235" font-family="Arial" font-size="14" font-weight="bold" fill="#ea4335" text-anchor="middle">Update Cepat</text>
-  <text x="300" y="255" font-family="Arial" font-size="9" fill="#aaa" text-anchor="middle">Update keamanan berkala</text>
+  <!-- Feature Cards Row 2 -->
+  <!-- Languages Card -->
+  <rect x="25" y="185" width="170" height="110" rx="16" fill="#1a1a2e" opacity="0.95"/>
+  <rect x="25" y="185" width="170" height="4" rx="2" fill="#34a853"/>
+  <text x="110" y="230" font-size="40" text-anchor="middle" filter="url(#glow)">🌏</text>
+  <text x="110" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#34a853" text-anchor="middle">Multi-Bahasa</text>
+  <text x="110" y="280" font-family="Arial, sans-serif" font-size="10" fill="#aaa" text-anchor="middle">50+ bahasa termasuk Indonesia</text>
   
-  <!-- Indonesia -->
-  <rect x="404" y="175" width="165" height="100" rx="15" fill="#1a1a2e" stroke="#fbbc05" stroke-width="2"/>
-  <text x="486" y="210" font-family="Arial" font-size="32" text-anchor="middle">🇮🇩</text>
-  <text x="486" y="235" font-family="Arial" font-size="14" font-weight="bold" fill="#fbbc05" text-anchor="middle">Made in Indonesia</text>
-  <text x="486" y="255" font-family="Arial" font-size="9" fill="#aaa" text-anchor="middle">Dirancang untuk Indonesia</text>
+  <!-- Updates Card -->
+  <rect x="215" y="185" width="170" height="110" rx="16" fill="#1a1a2e" opacity="0.95"/>
+  <rect x="215" y="185" width="170" height="4" rx="2" fill="#ea4335"/>
+  <text x="300" y="230" font-size="40" text-anchor="middle" filter="url(#glow)">🔄</text>
+  <text x="300" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#ea4335" text-anchor="middle">Update Cepat</text>
+  <text x="300" y="280" font-family="Arial, sans-serif" font-size="10" fill="#aaa" text-anchor="middle">Update keamanan berkala</text>
+  
+  <!-- Indonesia Card -->
+  <rect x="405" y="185" width="170" height="110" rx="16" fill="#1a1a2e" opacity="0.95"/>
+  <rect x="405" y="185" width="170" height="4" rx="2" fill="#fbbc05"/>
+  <text x="490" y="230" font-size="40" text-anchor="middle" filter="url(#glow)">🇮🇩</text>
+  <text x="490" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#fbbc05" text-anchor="middle">Made in Indonesia</text>
+  <text x="490" y="280" font-family="Arial, sans-serif" font-size="10" fill="#aaa" text-anchor="middle">Dirancang untuk Indonesia</text>
 </svg>
