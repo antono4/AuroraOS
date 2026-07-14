@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="50%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="auroraGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.6"/>
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="300" fill="url(#bgGrad)"/>
+  
+  <!-- Aurora Effect -->
+  <ellipse cx="400" cy="280" rx="500" ry="150" fill="url(#auroraGrad)">
+    <animate attributeName="rx" values="500;520;500" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="300" cy="260" rx="200" ry="80" fill="#8b5cf6" opacity="0.2">
+    <animate attributeName="cx" values="300;350;300" dur="6s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="500" cy="250" rx="180" ry="70" fill="#06b6d4" opacity="0.2">
+    <animate attributeName="cx" values="500;450;500" dur="5s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Stars -->
+  <circle cx="100" cy="50" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="200" cy="80" r="1" fill="white" opacity="0.6"/>
+  <circle cx="350" cy="30" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="500" cy="60" r="1" fill="white" opacity="0.5"/>
+  <circle cx="650" cy="40" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="720" cy="90" r="1" fill="white" opacity="0.6"/>
+  <circle cx="50" cy="120" r="1" fill="white" opacity="0.5"/>
+  <circle cx="750" cy="150" r="1.5" fill="white" opacity="0.7"/>
+  
+  <!-- Logo Text -->
+  <text x="400" y="140" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#8b5cf6" text-anchor="middle" filter="drop-shadow(0 0 20px #ff4444)">AURORA</text>
+  <text x="400" y="185" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#06b6d4" text-anchor="middle" filter="drop-shadow(0 0 15px #ffaa00)">OS</text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="230" font-family="Arial, sans-serif" font-size="16" fill="white" opacity="0.8" text-anchor="middle">Custom Android ROM • Android 17 (API 37)</text>
+</svg>

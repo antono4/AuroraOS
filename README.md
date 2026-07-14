@@ -4,6 +4,8 @@
 ![API](https://img.shields.io/badge/API-37-green?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
+![AuroraOS Banner](images/banner.svg)
+
 > **AuroraOS** - Sistem operasi Android kustom berbasis **NusantaraProject** dengan foundation **Android 17 (API 37)**. Dirancang untuk pengalaman pengguna yang superior dengan fitur privasi, performa, dan kustomisasi terdepan.
 
 ---
@@ -13,6 +15,8 @@
 AuroraOS adalah custom ROM Android yang dikembangkan untuk memberikan pengalaman Android murni yang dioptimalkan dengan fitur-fitur canggih. Nama "Aurora" terinspirasi dari fenomena cahaya aurora yang indah dan memukau, mencerminkan keindahan dan keunikan pengalaman pengguna yang kami tawarkan.
 
 ### ✨ Keunggulan AuroraOS
+
+![Fitur Overview](images/features-overview.svg)
 
 | Keunggulan | Deskripsi |
 |------------|-----------|
@@ -37,61 +41,62 @@ AuroraOS adalah custom ROM Android yang dikembangkan untuk memberikan pengalaman
 - [❓ FAQ](#-faq)
 - [🤝 Kontribusi](#-kontribusi)
 - [📜 Lisensi](#-lisensi)
+- [🙏 Kredit](#-kredit)
+- [🔗 Link Berguna](#-link-berguna)
 
 ---
 
 ## 🚀 Fitur Utama
 
+![AuroraOS UI](images/phone-mockup.svg)
+
 ### 🔒 Keamanan & Privasi
 
-```
-✓ Privacy Dashboard dengan kontrol granular
-✓ Photo Picker tanpa akses galeri penuh
-✓ Block cleartext traffic secara default
-✓ Enhanced SELinux policies
-✓ App Sandbox yang diperkuat
-✓ Biometric authentication enhancement
-```
+- Privacy Dashboard dengan kontrol granular
+- Photo Picker tanpa akses galeri penuh
+- Block cleartext traffic secara default
+- Enhanced SELinux policies
+- App Sandbox yang diperkuat
+- Biometric authentication enhancement
 
 ### ⚡ Performa & Optimasi
 
-```
-✓ Memory management yang dioptimalkan
-✓ VM tuning untuk responsivitas
-✓ Network buffer optimization
-✓ Display performance tuning
-✓ Battery saver enhancement
-✓ App Functions untuk AI-powered features
-```
+- Memory management yang dioptimalkan
+- VM tuning untuk responsivitas
+- Network buffer optimization
+- Display performance tuning
+- Battery saver enhancement
+- App Functions untuk AI-powered features
 
 ### 🎨 Kustomisasi UI/UX
 
-```
-✓ Edge-to-Edge display support
-✓ Resizable apps untuk tablet/foldable
-✓ Adaptive icons
-✓ Dark Mode dengan banyak pilihan
-✓ Accent color customization
-✓ Custom fonts support
-✓ Quick Settings tiles editor
-```
+- Edge-to-Edge display support
+- Resizable apps untuk tablet/foldable
+- Adaptive icons
+- Dark Mode dengan banyak pilihan
+- Accent color customization
+- Custom fonts support
+- Quick Settings tiles editor
 
 ### 📱 NusantaraProject Heritage
 
-```
-✓ Didesain untuk pengguna Indonesia
-✓ Dukungan Bahasa Indonesia native
-✓ Region-specific optimizations
-✓ Local community support
-```
+- Didesain untuk pengguna Indonesia
+- Dukungan Bahasa Indonesia native
+- Region-specific optimizations
+- Local community support
 
 ---
 
 ## 📦 Fitur Android 17
 
+![Android 17 Features](images/android17-features.svg)
+
 Android 17 (API 37) membawa banyak fitur baru yang kami integrasikan ke AuroraOS:
 
 ### Privacy & Security (Android 17)
+
+![Privacy Dashboard](images/privacy-dashboard.svg) ![Quick Settings](images/quick-settings.svg)
+
 - **Enhanced Privacy Dashboard** - Monitoring akses aplikasi
 - **Photo Picker V2** - Pilih foto tanpa berikan akses penuh ke galeri
 - **Block Cleartext Default** - HTTP traffic diblokir kecuali dikonfigurasi
@@ -104,7 +109,7 @@ Android 17 (API 37) membawa banyak fitur baru yang kami integrasikan ke AuroraOS
 - **Memory optimization** - Conservative memory limits
 
 ### UI/UX (Android 17)
-- **Edge-to-Edge Display** - Conten utilization maximized
+- **Edge-to-Edge Display** - Content utilization maximized
 - **Mandatory Large-Screen Resizability** - Tablet/foldable optimized
 - **Improved Orientation APIs** - Better screen handling
 - **Contact Picker** - Tanpa memerlukan READ_CONTACTS permission
@@ -204,27 +209,7 @@ chmod +x scripts/setup.sh
 
 ### Alur Build
 
-```
-┌─────────────────────┐
-│  1. Setup Env       │  ← Install dependencies
-└──────────┬──────────┘
-           ▼
-┌─────────────────────┐
-│  2. Sync Source     │  ← repo sync
-└──────────┬──────────┘
-           ▼
-┌─────────────────────┐
-│  3. Customize       │  ← Branding & features
-└──────────┬──────────┘
-           ▼
-┌─────────────────────┐
-│  4. Build ROM       │  ← make -j$(nproc)
-└──────────┬──────────┘
-           ▼
-┌─────────────────────┐
-│  5. Output          │  ← ZIP file ready
-└─────────────────────┘
-```
+![Build Flow](images/build-flow.svg)
 
 ### Detail Build
 
@@ -240,7 +225,7 @@ breakfast
 ./scripts/customize.sh
 
 # 4. Build
-m -j$(nproc)
+mka -j$(nproc)
 
 # 5. Output location
 # out/target/product/[device]/AuroraOS-v1.0.0-[date].zip
@@ -289,7 +274,17 @@ AuroraOS/
 │
 ├── 📄 README.md                    # Dokumentasi utama
 ├── 📄 QUICKSTART.md               # Panduan cepat
+├── 📄 BUILD.md                    # Panduan build detail
 ├── 📄 LICENSE                     # Lisensi MIT
+│
+├── 📂 images/                     # Gambar dokumentasi
+│   ├── banner.svg                # Banner utama
+│   ├── phone-mockup.svg          # Tampilan UI
+│   ├── features-overview.svg     # Overview fitur
+│   ├── privacy-dashboard.svg    # Privacy dashboard
+│   ├── quick-settings.svg       # Quick settings
+│   ├── android17-features.svg    # Fitur Android 17
+│   └── build-flow.svg            # Alur build
 │
 ├── 📂 manifest/                   # Manifest repositori
 │   └── default.xml                # Konfigurasi sync
@@ -311,9 +306,7 @@ AuroraOS/
 │   └── local_manifests/         # Local manifests
 │
 └── 📂 docs/                     # Dokumentasi
-    ├── BUILD_GUIDE.md           # Panduan build
-    ├── CUSTOMIZATION.md        # Panduan kustomisasi
-    └── DEVICES.md              # Daftar perangkat
+    └── BUILD_GUIDE.md           # Panduan build detail
 ```
 
 ---
@@ -377,8 +370,8 @@ AuroraOS dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE) u
 - 📱 [NusantaraProject](https://nusantararom.org)
 - 📘 [AOSP](https://source.android.com/)
 - 📖 [Android 17 Release Notes](https://developer.android.com/about/versions/17)
-- 💬 [Telegram Group](#)
-- 🐛 [Report Issues](#)
+- 💬 [Telegram Group](https://t.me/auroraos)
+- 🐛 [Report Issues](https://github.com/AuroraOS/AuroraOS/issues)
 
 ---
 
@@ -387,7 +380,5 @@ AuroraOS dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE) u
 **Dibuat dengan ❤️ untuk komunitas Android Indonesia**
 
 *"Bringing the Aurora to your device"*
-
-![AuroraOS](https://img.shields.io/badge/Made%20with-Aurora-FF6B6B?style=for-the-badge)
 
 </div>

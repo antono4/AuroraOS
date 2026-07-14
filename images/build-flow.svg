@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350">
+  <defs>
+    <linearGradient id="stepGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="stepGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#0891b2"/>
+    </linearGradient>
+    <linearGradient id="stepGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="stepGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#34a853"/>
+      <stop offset="100%" style="stop-color:#16a34a"/>
+    </linearGradient>
+    <linearGradient id="stepGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ea4335"/>
+      <stop offset="100%" style="stop-color:#dc2626"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="350" fill="#0f0c29"/>
+  
+  <!-- Title -->
+  <text x="300" y="30" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">🔨 Alur Build AuroraOS</text>
+  
+  <!-- Step 1 -->
+  <rect x="30" y="55" width="520" height="50" rx="12" fill="url(#stepGrad1)"/>
+  <text x="50" y="85" font-family="Arial" font-size="24" font-weight="bold" fill="white">1</text>
+  <text x="85" y="80" font-family="Arial" font-size="14" font-weight="bold" fill="white">Setup Environment</text>
+  <text x="85" y="97" font-family="Arial" font-size="10" fill="white" opacity="0.8">Install dependencies & configure build tools</text>
+  <text x="510" y="82" font-family="monospace" font-size="9" fill="white" opacity="0.7" text-anchor="end">./scripts/setup.sh</text>
+  
+  <!-- Arrow -->
+  <path d="M290 L290 L310 L310" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+  <polygon points="310,300 300,290 320,290" fill="#8b5cf6" transform="translate(0, -240)"/>
+  
+  <!-- Step 2 -->
+  <rect x="30" y="120" width="520" height="50" rx="12" fill="url(#stepGrad2)"/>
+  <text x="50" y="150" font-family="Arial" font-size="24" font-weight="bold" fill="white">2</text>
+  <text x="85" y="145" font-family="Arial" font-size="14" font-weight="bold" fill="white">Sync Source</text>
+  <text x="85" y="162" font-family="Arial" font-size="10" fill="white" opacity="0.8">Download AOSP + NusantaraProject repos</text>
+  <text x="510" y="147" font-family="monospace" font-size="9" fill="white" opacity="0.7" text-anchor="end">repo sync</text>
+  
+  <!-- Arrow -->
+  <polygon points="310,175 300,165 320,165" fill="#06b6d4"/>
+  
+  <!-- Step 3 -->
+  <rect x="30" y="185" width="520" height="50" rx="12" fill="url(#stepGrad3)"/>
+  <text x="50" y="215" font-family="Arial" font-size="24" font-weight="bold" fill="white">3</text>
+  <text x="85" y="210" font-family="Arial" font-size="14" font-weight="bold" fill="white">Customize</text>
+  <text x="85" y="227" font-family="Arial" font-size="10" fill="white" opacity="0.8">Branding, wallpaper, & features</text>
+  <text x="510" y="212" font-family="monospace" font-size="9" fill="white" opacity="0.7" text-anchor="end">./scripts/customize.sh</text>
+  
+  <!-- Arrow -->
+  <polygon points="310,240 300,230 320,230" fill="#f59e0b"/>
+  
+  <!-- Step 4 -->
+  <rect x="30" y="250" width="520" height="50" rx="12" fill="url(#stepGrad4)"/>
+  <text x="50" y="280" font-family="Arial" font-size="24" font-weight="bold" fill="white">4</text>
+  <text x="85" y="275" font-family="Arial" font-size="14" font-weight="bold" fill="white">Build ROM</text>
+  <text x="85" y="292" font-family="Arial" font-size="10" fill="white" opacity="0.8">Compile source code to flashable ZIP</text>
+  <text x="510" y="277" font-family="monospace" font-size="9" fill="white" opacity="0.7" text-anchor="end">mka -j$(nproc)</text>
+  
+  <!-- Arrow -->
+  <polygon points="310,305 300,295 320,295" fill="#34a853"/>
+  
+  <!-- Step 5 - Output -->
+  <rect x="200" y="310" width="200" height="35" rx="10" fill="url(#stepGrad5)"/>
+  <text x="300" y="333" font-family="Arial" font-size="12" font-weight="bold" fill="white" text-anchor="middle">📦 Output: AuroraOS-v*.zip</text>
+</svg>

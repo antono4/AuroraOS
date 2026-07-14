@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
+  <defs>
+    <linearGradient id="a17Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a472a"/>
+      <stop offset="100%" style="stop-color:#0f2d1a"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="320" fill="url(#a17Grad)"/>
+  
+  <!-- Header Badge -->
+  <rect x="200" y="15" width="200" height="35" rx="17" fill="#4CAF50"/>
+  <text x="300" y="38" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Android 17 (API 37)</text>
+  
+  <!-- Feature Grid -->
+  <!-- Row 1 -->
+  <rect x="20" y="65" width="175" height="75" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="40" y="90" font-family="Arial" font-size="20">🔐</text>
+  <text x="55" y="88" font-family="Arial" font-size="12" font-weight="bold" fill="#8b5cf6">Private Space</text>
+  <text x="40" y="105" font-family="Arial" font-size="9" fill="#aaa">Area tersembunyi untuk</text>
+  <text x="40" y="118" font-family="Arial" font-size="9" fill="#aaa">aplikasi sensitif</text>
+  
+  <rect x="212" y="65" width="175" height="75" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="232" y="90" font-family="Arial" font-size="20">🖼️</text>
+  <text x="247" y="88" font-family="Arial" font-size="12" font-weight="bold" fill="#06b6d4">Photo Picker V2</text>
+  <text x="232" y="105" font-family="Arial" font-size="9" fill="#aaa">Pilih foto tanpa berikan</text>
+  <text x="232" y="118" font-family="Arial" font-size="9" fill="#aaa">akses penuh ke galeri</text>
+  
+  <rect x="405" y="65" width="175" height="75" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="425" y="90" font-family="Arial" font-size="20">🛡️</text>
+  <text x="440" y="88" font-family="Arial" font-size="12" font-weight="bold" fill="#f59e0b">Block Cleartext</text>
+  <text x="425" y="105" font-family="Arial" font-size="9" fill="#aaa">HTTP traffic diblokir</text>
+  <text x="425" y="118" font-family="Arial" font-size="9" fill="#aaa">kecuali dikonfigurasi</text>
+  
+  <!-- Row 2 -->
+  <rect x="20" y="155" width="175" height="75" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="40" y="180" font-family="Arial" font-size="20">📺</text>
+  <text x="55" y="178" font-family="Arial" font-size="12" font-weight="bold" fill="#ea4335">Edge-to-Edge</text>
+  <text x="40" y="195" font-family="Arial" font-size="9" fill="#aaa">Tampilan penuh tanpa</text>
+  <text x="40" y="208" font-family="Arial" font-size="9" fill="#aaa">batas layar</text>
+  
+  <rect x="212" y="155" width="175" height="75" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="232" y="180" font-family="Arial" font-size="20">📱</text>
+  <text x="247" y="178" font-family="Arial" font-size="12" font-weight="bold" fill="#34a853">Resizable Apps</text>
+  <text x="232" y="195" font-family="Arial" font-size="9" fill="#aaa">Optimized untuk tablet</text>
+  <text x="232" y="208" font-family="Arial" font-size="9" fill="#aaa">dan foldable devices</text>
+  
+  <rect x="405" y="155" width="175" height="75" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="425" y="180" font-family="Arial" font-size="20">📡</text>
+  <text x="440" y="178" font-family="Arial" font-size="12" font-weight="bold" fill="#00bcd4">Wi-Fi 7 Ready</text>
+  <text x="425" y="195" font-family="Arial" font-size="9" fill="#aaa">Next-generation Wi-Fi</text>
+  <text x="425" y="208" font-family="Arial" font-size="9" fill="#aaa">support</text>
+  
+  <!-- Row 3 -->
+  <rect x="20" y="245" width="175" height="65" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="40" y="270" font-family="Arial" font-size="20">🎵</text>
+  <text x="55" y="268" font-family="Arial" font-size="12" font-weight="bold" fill="#ec407a">Media3 Effects</text>
+  <text x="40" y="285" font-family="Arial" font-size="9" fill="#aaa">On-device AI video processing</text>
+  
+  <rect x="212" y="245" width="175" height="65" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="232" y="270" font-family="Arial" font-size="20">👤</text>
+  <text x="247" y="268" font-family="Arial" font-size="12" font-weight="bold" fill="#ab47bc">Contact Picker</text>
+  <text x="232" y="285" font-family="Arial" font-size="9" fill="#aaa">Tanpa READ_CONTACTS permission</text>
+  
+  <rect x="405" y="245" width="175" height="65" rx="12" fill="#1a1a2e" opacity="0.9"/>
+  <text x="425" y="270" font-family="Arial" font-size="20">🤖</text>
+  <text x="440" y="268" font-family="Arial" font-size="12" font-weight="bold" fill="#26c6da">App Functions</text>
+  <text x="425" y="285" font-family="Arial" font-size="9" fill="#aaa">AI-powered app interactions</text>
+</svg>
