@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    AuroraOS Custom Permissions
+    Android 17 Custom ROM
+-->
+<permissions>
+    
+    <!-- AuroraOS Feature Permission -->
+    <permission name="android.permission.AURORA_FEATURE">
+        <description>Allows access to AuroraOS features</description>
+        <protection level="normal" />
+    </permission>
+    
+    <!-- Enhanced Privacy -->
+    <permission name="android.permission.ENHANCED_PRIVACY">
+        <description>Allows access to enhanced privacy features</description>
+        <protection level="dangerous" />
+    </permission>
+    
+    <!-- Performance Mode -->
+    <permission name="android.permission.PERFORMANCE_MODE">
+        <description>Allows access to performance optimization</description>
+        <protection level="normal" />
+    </permission>
+    
+    <!-- Theme Customization -->
+    <permission name="android.permission.THEME_CUSTOMIZATION">
+        <description>Allows access to theme customization</description>
+        <protection level="normal" />
+    </permission>
+    
+    <!-- Gaming Mode -->
+    <permission name="android.permission.GAMING_MODE">
+        <description>Allows access to gaming mode features</description>
+        <protection level="normal" />
+    </permission>
+    
+    <!-- Nusantara Heritage -->
+    <permission name="android.permission.NUSANTARA_FEATURE">
+        <description>Allows access to Nusantara-specific features</description>
+        <protection level="normal" />
+    </permission>
+
+</permissions>

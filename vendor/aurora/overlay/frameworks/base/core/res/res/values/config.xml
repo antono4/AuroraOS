@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ===========================================================
+    AuroraOS - Overlay Configuration
+    Android 17 Custom ROM
+    
+    This overlay provides default configuration for:
+    - Status Bar
+    - Navigation Bar
+    - Quick Settings
+    - Display Settings
+    - Lock Screen
+    - And more...
+    ===========================================================
+-->
+<resources>
+    
+    <!-- =========================================================== -->
+    <!-- AuroraOS Identity                                         -->
+    <!-- =========================================================== -->
+    <string name="aurora_rom_name">AuroraOS</string>
+    <string name="aurora_rom_version">Android 17 (API 37)</string>
+    <string name="aurora_rom_base">NusantaraProject</string>
+    <string name="aurora_theme_suffix">aurora</string>
+    
+    <!-- =========================================================== -->
+    <!-- Status Bar Configuration                                  -->
+    <!-- =========================================================== -->
+    
+    <!-- Show Clock in Status Bar -->
+    <bool name="config_showClock">true</bool>
+    
+    <!-- Clock Position (true = right, false = left) -->
+    <bool name="config_statusBarClockRight">true</bool>
+    
+    <!-- Show Four Columns in Quick Settings -->
+    <bool name="config_showFourColumns">true</bool>
+    
+    <!-- Status Bar Icons -->
+    <string name="config_statusBarIcons">wifi,signal,airplane,flashlight,battery</string>
+    
+    <!-- Show Network Speed -->
+    <bool name="config_showNetworkSpeed">true</bool>
+    
+    <!-- Quick Settings Grid -->
+    <integer name="config_qsNumColumns">4</integer>
+    
+    <!-- Show QS Footer Buttons -->
+    <bool name="config_showSettingsButton">true</bool>
+    <bool name="config_showEditButton">true</bool>
+
+    <!-- =========================================================== -->
+    <!-- Navigation Bar Configuration                              -->
+    <!-- =========================================================== -->
+    
+    <!-- Enable Navigation Bar -->
+    <bool name="config_enableNavBar">true</bool>
+    
+    <!-- Navigation Bar Layout -->
+    <string name="config_navBarLayout">left,back,home,recent,right</string>
+    
+    <!-- Enable Gesture Navigation -->
+    <bool name="config_enableGestureNavbar">true</bool>
+    
+    <!-- Gesture Threshold -->
+    <dimen name="config_navBarGestureMinWidth">48dp</dimen>
+
+    <!-- =========================================================== -->
+    <!-- Display Settings                                           -->
+    <!-- =========================================================== -->
+    
+    <!-- Default Night Mode (Dark Mode) -->
+    <bool name="config_defaultNightMode">true</bool>
+    
+    <!-- Auto Brightness -->
+    <integer name="config_autobrightness_broadcast_default">1</integer>
+    
+    <!-- Screen Timeout (ms) - 30 days -->
+    <integer name="config_screen_off_timeout">2592000000</integer>
+
+    <!-- =========================================================== -->
+    <!-- Lock Screen Configuration                                  -->
+    <!-- =========================================================== -->
+    
+    <!-- Show Shortcuts on Lock Screen -->
+    <bool name="config_showShortcutsOnLockscreen">true</bool>
+    
+    <!-- Lock Screen Camera -->
+    <bool name="config_lockscreenCameraEnabled">true</bool>
+    
+    <!-- Lock Screen Wallet -->
+    <bool name="config_lockscreenWalletEnabled">true</bool>
+
+    <!-- =========================================================== -->
+    <!-- Sound Settings                                             -->
+    <!-- =========================================================== -->
+    
+    <!-- Volume Panel Style -->
+    <string name="config_volumePanel">com.android.systemui.volume.VolumePanel</string>
+    
+    <!-- Enable Volume Sounds -->
+    <bool name="config_useVolumeSound">true</bool>
+
+    <!-- =========================================================== -->
+    <!-- AuroraOS Accent Color                                      -->
+    <!-- =========================================================== -->
+    <color name="aurora_accent_color">#00BCD4</color>
+    <color name="aurora_primary_color">#2196F3</color>
+    <color name="aurora_secondary_color">#03A9F4</color>
+
+</resources>

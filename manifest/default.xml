@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    ===========================================================
+    AuroraOS - Android 17 Custom ROM
+    Based on NusantaraProject & Android Open Source Project
+    
+    Manifest Configuration for AuroraOS
+    API Level: 37 (Android 17)
+    ===========================================================
+-->
+<manifest>
+    
+    <!-- Remote Configuration -->
+    <remote name="aurora"
+            fetch="https://github.com/"
+            review="https://github.com/"
+            pushurl="git@github.com:"
+            override="true" />
+    
+    <remote name="nusantara"
+            fetch="https://github.com/NusantaraProject-ROM/"
+            pushurl="git@github.com:NusantaraProject-ROM:"
+            review="https://github.com/NusantaraProject-ROM" />
+    
+    <remote name="aosp"
+            fetch="https://android.googlesource.com/"
+            pushurl="git@android.googlesource.com:"
+            review="https://android-review.googlesource.com" />
+    
+    <!-- Default Settings -->
+    <default revision="main"
+             remote="aurora"
+             sync-j="8"
+             force-path="true" />
+    
+    <!-- Core Manifest -->
+    <project path="manifest"
+             name="platform/manifest"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- NusantaraProject Integration -->
+    <project path="vendor/nusantara"
+             name="android_vendor_nusantara"
+             remote="nusantara"
+             revision="main" />
+    
+    <project path="packages/apps/NusantaraWings"
+             name="android_packages_apps_NusantaraWings"
+             remote="nusantara"
+             revision="main" />
+    
+    <project path="packages/apps/Settings"
+             name="android_packages_apps_Settings"
+             remote="nusantara"
+             revision="main" />
+    
+    <!-- Framework Base -->
+    <project path="frameworks/base"
+             name="platform/frameworks/base"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="frameworks/native"
+             name="platform/frameworks/native"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Core Apps -->
+    <project path="packages/apps/Launcher3"
+             name="platform/packages/apps/Launcher3"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="packages/apps/Contacts"
+             name="platform/packages/apps/Contacts"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="packages/apps/Dialer"
+             name="platform/packages/apps/Dialer"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="packages/apps/Camera2"
+             name="platform/packages/apps/Camera2"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- System -->
+    <project path="system/core"
+             name="platform/system/core"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="system/sepolicy"
+             name="platform/system/sepolicy"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="system/bt"
+             name="platform/system/bt"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="system/netd"
+             name="platform/system/netd"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Hardware -->
+    <project path="hardware/interfaces"
+             name="platform/hardware/interfaces"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="hardware/libhardware"
+             name="platform/hardware/libhardware"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- External -->
+    <project path="external/icu"
+             name="platform/external/icu"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="external/openssl"
+             name="platform/external/openssl"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="external/curl"
+             name="platform/external/curl"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Prebuilts -->
+    <project path="prebuilts/clang/linux-x86"
+             name="platform/prebuilts/clang/linux-x86"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="prebuilts/gcc/linux-x86"
+             name="platform/prebuilts/gcc/linux-x86"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="prebuilts/sdk"
+             name="platform/prebuilts/sdk"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="prebuilts/build-tools"
+             name="platform/prebuilts/build-tools"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Build -->
+    <project path="build"
+             name="platform/build"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="build/blueprint"
+             name="platform/build/blueprint"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="build/soong"
+             name="platform/build/soong"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Development -->
+    <project path="development"
+             name="platform/development"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Device -->
+    <project path="device/common"
+             name="platform/device/common"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="device/google/coral"
+             name="platform/device/google/coral"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="device/google/raven"
+             name="platform/device/google/raven"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="device/google/panther"
+             name="platform/device/google/panther"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Kernel -->
+    <project path="kernel/google/msm"
+             name="kernel/google/msm"
+             remote="aosp"
+             revision="main" />
+    
+    <!-- Vendor -->
+    <project path="vendor/google"
+             name="platform/vendor/google"
+             remote="aosp"
+             revision="main" />
+    
+    <project path="vendor/qcom"
+             name="platform/vendor/qcom"
+             remote="aosp"
+             revision="main" />
+    
+</manifest>

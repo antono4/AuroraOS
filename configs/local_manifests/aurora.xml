@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    AuroraOS - Local Manifest
+    Place this file in .repo/local_manifests/ before running repo sync
+-->
+<manifest>
+  
+  <!-- Your forked repos - Uncomment and edit with your GitHub username -->
+  
+  <!--
+  <project name="YOUR_USERNAME/android_manifest" 
+           path="manifest" 
+           remote="aurora"
+           revision="main" />
+  
+  <project name="YOUR_USERNAME/android_vendor_nusantara" 
+           path="vendor/nusantara" 
+           remote="aurora"
+           revision="main" />
+           
+  <project name="YOUR_USERNAME/android_packages_apps_NusantaraWings" 
+           path="packages/apps/NusantaraWings" 
+           remote="aurora"
+           revision="main" />
+           
+  <project name="YOUR_USERNAME/android_packages_apps_Settings" 
+           path="packages/apps/Settings" 
+           remote="aurora"
+           revision="main" />
+           
+  <project name="YOUR_USERNAME/android_frameworks_base" 
+           path="frameworks/base" 
+           remote="aurora"
+           revision="main" />
+  -->
+
+</manifest>
