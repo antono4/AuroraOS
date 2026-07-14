@@ -343,6 +343,19 @@
             padding: 25px 15px 5px;
             font-size: 12px;
             font-weight: 500;
+            position: relative;
+        }
+        
+        .status-bar::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
         }
 
         .status-icons {
@@ -1408,26 +1421,55 @@ function toggleTile(el) {
     showToast(el.querySelector('span').textContent + (el.classList.contains('active') ? ' Nyala' : ' Mati'));
 }
 
-// Touch events for QS
+// Touch events for QS - Attach to device mockup
 let startY = 0;
+let isDragging = false;
+const device = document.getElementById('device');
+
 document.addEventListener('touchstart', (e) => {
     startY = e.touches[0].clientY;
-});
+    isDragging = true;
+}, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - startY;
+    
+    // Show indicator when pulling down from top
+    if (startY < 100 && diff > 20) {
+        document.getElementById('pull-indicator').style.opacity = Math.min(diff / 100, 1);
+    }
+}, { passive: true });
 
 document.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    
     const endY = e.changedTouches[0].clientY;
-    if (startY < 50 && endY > 150) {
+    const diff = endY - startY;
+    
+    // Hide indicator
+    document.getElementById('pull-indicator').style.opacity = 0;
+    
+    // Pull down from top to open QS
+    if (startY < 50 && diff > 100) {
         toggleQS(true);
-    } else if (startY > 100 && endY < 50) {
+    } 
+    // Pull up from QS to close
+    else if (startY > 200 && diff < -100) {
         toggleQS(false);
     }
-});
+}, { passive: true });
 
-// Keyboard
+// Also allow keyboard shortcut
 document.addEventListener('keydown', (e) => {
     if (e.key === 'm' || e.key === 'M') toggleQS(true);
     if (e.key === 'Escape') toggleQS(false);
 });
+
+// Add pull indicator to status bar
+document.querySelector('.status-bar').innerHTML += '<div id="pull-indicator" style="position:absolute;top:100%;left:50%;transform:translateX(-50%);padding:5px 15px;background:rgba(139,92,246,0.8);border-radius:20px;font-size:11px;opacity:0;transition:opacity 0.2s;pointer-events:none;">↓ Tarik ke bawah</div>';
 
 // Apps
 function openApp(appId) {
