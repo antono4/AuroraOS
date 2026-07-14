@@ -789,9 +789,9 @@
 
             <!-- App Grid -->
             <div class="app-grid">
-                <div class="app-icon" onclick="openApp('mobilelegends')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                        <i class="fa-solid fa-gamepad"></i>
+                <div class="app-icon" onclick="openApp('weather')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+                        <i class="fa-solid fa-cloud-sun"></i>
                     </div>
                     <span class="app-icon-label">Aurora</span>
                 </div>
@@ -813,9 +813,9 @@
                     </div>
                     <span class="app-icon-label">Chrome</span>
                 </div>
-                <div class="app-icon" onclick="openApp('gamecenter')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #7c4dff, #651fff);">
-                        <i class="fa-solid fa-trophy"></i>
+                <div class="app-icon" onclick="openApp('recorder')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                        <i class="fa-solid fa-video"></i>
                     </div>
                     <span class="app-icon-label">Game Ctr</span>
                 </div>
@@ -825,21 +825,21 @@
                     </div>
                     <span class="app-icon-label">Kamera</span>
                 </div>
-                <div class="app-icon" onclick="openApp('pengaturan')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #64748b, #475569);">
-                        <i class="fa-solid fa-gear"></i>
+                <div class="app-icon" onclick="openApp('privacy')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <span class="app-icon-label">Pengaturan</span>
                 </div>
-                <div class="app-icon" onclick="openApp('galeri')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                        <i class="fa-solid fa-image"></i>
+                <div class="app-icon" onclick="openApp('health')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+                        <i class="fa-solid fa-heart"></i>
                     </div>
                     <span class="app-icon-label">Galeri</span>
                 </div>
-                <div class="app-icon" onclick="openApp('youtube')">
-                    <div class="app-icon-img" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-                        <i class="fa-brands fa-youtube"></i>
+                <div class="app-icon" onclick="openApp('smarthome')">
+                    <div class="app-icon-img" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                        <i class="fa-brands fa-home"></i>
                     </div>
                     <span class="app-icon-label">YouTube</span>
                 </div>
@@ -896,7 +896,7 @@
 
     <!-- ==================== AURORA OS APP ==================== -->
     <div class="app-screen" id="app-mobilelegends">
-        <div class="app-header" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+        <div class="app-header" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
             <div class="app-nav">
                 <button class="app-back" onclick="closeApp('mobilelegends')"><i class="fa-solid fa-arrow-left"></i></button>
                 <span class="app-title">Aurora OS</span>
@@ -940,57 +940,187 @@
     </div>
 
     <!-- ==================== GAME CENTER APP ==================== -->
-    <div class="app-screen" id="app-gamecenter">
-        <div class="app-header" style="background: linear-gradient(135deg, #7c4dff, #651fff);">
+    <div class="app-screen" id="app-recorder">
+        <div class="app-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
             <div class="app-nav">
-                <button class="app-back" onclick="closeApp('gamecenter')"><i class="fa-solid fa-arrow-left"></i></button>
-                <span class="app-title">Game Center</span>
+                <button class="app-back" onclick="closeApp('recorder')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Screen Recorder</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="background: #000; border-radius: 20px; aspect-ratio: 9/16; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; opacity: 0.3;">⏺️</div>
+                    <div style="font-size: 32px; margin-top: 10px; font-weight: 300;">00:00</div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                <button style="width: 70px; height: 70px; border-radius: 50%; background: #ef4444; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 25px; height: 25px; background: white; border-radius: 50%;"></div>
+                </button>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div><div style="font-size: 14px;">Rekam audio</div><div style="font-size: 11px; opacity: 0.6;">Dengan mikrofon</div></div>
+                    <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                    <div><div style="font-size: 14px;">Kualitas video</div><div style="font-size: 11px; opacity: 0.6;">1080p Full HD</div></div>
+                    <i class="fa-solid fa-chevron-right" style="opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PRIVACY DASHBOARD ==================== -->
+    <div class="app-screen" id="app-privacy">
+        <div class="app-header" style="background: linear-gradient(135deg, #10b981, #059669);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('privacy')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Privasi</span>
             </div>
         </div>
         <div class="app-content">
             <div style="text-align: center; padding: 20px 0;">
-                <div style="font-size: 50px;">🏆</div>
-                <h2 style="font-size: 22px; margin-bottom: 5px;">Achievements</h2>
+                <div style="font-size: 50px; margin-bottom: 10px;">🔒</div>
+                <h2 style="font-size: 20px;">Privacy Dashboard</h2>
+                <p style="font-size: 13px; opacity: 0.7;">Pantau penggunaan sensor</p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;">
-                <div style="background: linear-gradient(135deg, #ffd700, #ff9800); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 30px;">🥇</div>
-                    <div style="font-size: 11px; margin-top: 5px;">Legend</div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;">
+                    <div style="width: 40px; height: 40px; background: #22c55e; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;"><i class="fa-solid fa-camera"></i></div>
+                    <div style="font-size: 11px; opacity: 0.6;">Kamera</div>
+                    <div style="font-size: 20px; font-weight: 600;">2</div>
                 </div>
-                <div style="background: linear-gradient(135deg, #c0c0c0, #9e9e9e); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 30px;">🥈</div>
-                    <div style="font-size: 11px; margin-top: 5px;">Master</div>
-                </div>
-                <div style="background: linear-gradient(135deg, #cd7f32, #a0522d); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 30px;">🥉</div>
-                    <div style="font-size: 11px; margin-top: 5px;">Epic</div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;">
+                    <div style="width: 40px; height: 40px; background: #ef4444; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;"><i class="fa-solid fa-microphone"></i></div>
+                    <div style="font-size: 11px; opacity: 0.6;">Mikrofon</div>
+                    <div style="font-size: 20px; font-weight: 600;">5</div>
                 </div>
             </div>
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
-                <h3 style="margin-bottom: 10px;">Recent Games</h3>
-                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <span style="font-size: 24px;">⚔️</span>
-                    <div style="flex: 1;">
-                        <div style="font-weight: 600;">Aurora OS</div>
-                        <div style="font-size: 12px; opacity: 0.6;">2 jam lalu</div>
-                    </div>
-                    <span style="color: #22c55e;">WIN</span>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <h3 style="margin-bottom: 15px;">Akses Terkini</h3>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div style="flex: 1;"><div style="font-weight: 600;">WhatsApp</div><div style="font-size: 11px; opacity: 0.6;">Mikrofon • 5 menit lalu</div></div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <span style="font-size: 24px;">🎮</span>
-                    <div style="flex: 1;">
-                        <div style="font-weight: 600;">PUBG Mobile</div>
-                        <div style="font-size: 12px; opacity: 0.6;">5 jam lalu</div>
-                    </div>
-                    <span style="color: #ef4444;">LOSE</span>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-chrome"></i></div>
+                    <div style="flex: 1;"><div style="font-weight: 600;">Chrome</div><div style="font-size: 11px; opacity: 0.6;">Kamera • 1 jam lalu</div></div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0;">
-                    <span style="font-size: 24px;">🏆</span>
-                    <div style="flex: 1;">
-                        <div style="font-weight: 600;">Free Fire</div>
-                        <div style="font-size: 12px; opacity: 0.6;">Kemarin</div>
-                    </div>
-                    <span style="color: #22c55e;">WIN</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== WEATHER APP ==================== -->
+    <div class="app-screen" id="app-weather">
+        <div class="app-header" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('weather')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Cuaca</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="background: linear-gradient(180deg, #3b82f6, #1e40af); border-radius: 25px; padding: 25px; text-align: center; margin-bottom: 15px;">
+                <div style="font-size: 80px; margin-bottom: 10px;">☀️</div>
+                <div style="font-size: 72px; font-weight: 200;">28°</div>
+                <div style="font-size: 16px; opacity: 0.9;">Cerah</div>
+                <div style="font-size: 13px; opacity: 0.7; margin-top: 10px;">Jakarta • Sekarang</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">06:00</div><div style="font-size: 24px; margin: 5px 0;">🌤️</div><div style="font-size: 13px;">26°</div></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">09:00</div><div style="font-size: 24px; margin: 5px 0;">☀️</div><div style="font-size: 13px;">29°</div></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">12:00</div><div style="font-size: 24px; margin: 5px 0;">🌞</div><div style="font-size: 13px;">32°</div></div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 15px; text-align: center;"><div style="font-size: 11px; opacity: 0.7;">15:00</div><div style="font-size: 24px; margin: 5px 0;">⛅</div><div style="font-size: 13px;">31°</div></div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span style="font-weight: 600;">Detail</span></div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-wind" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Angin</div><div style="font-size: 13px;">12 km/j</div></div></div>
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-tint" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Kelembaban</div><div style="font-size: 13px;">65%</div></div></div>
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-eye" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Visibilitas</div><div style="font-size: 13px;">10 km</div></div></div>
+                    <div style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-compress-alt" style="opacity: 0.6;"></i><div><div style="font-size: 11px; opacity: 0.6;">Tekanan</div><div style="font-size: 13px;">1012 hPa</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEALTH CONNECT ==================== -->
+    <div class="app-screen" id="app-health">
+        <div class="app-header" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('health')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Health</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="text-align: center; padding: 15px 0;">
+                <div style="font-size: 50px; margin-bottom: 10px;">❤️</div>
+                <div style="font-size: 36px; font-weight: 600; color: #ec4899;">8,432</div>
+                <div style="font-size: 13px; opacity: 0.7;">Langkah hari ini</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">🔥</div><div style="font-size: 18px; font-weight: 600;">342</div><div style="font-size: 10px; opacity: 0.6;">Kalori</div></div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">⏱️</div><div style="font-size: 18px; font-weight: 600;">45m</div><div style="font-size: 10px; opacity: 0.6;">Aktif</div></div>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;"><div style="font-size: 24px;">💤</div><div style="font-size: 18px; font-weight: 600;">7h</div><div style="font-size: 10px; opacity: 0.6;">Tidur</div></div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <h3 style="margin-bottom: 15px;">Aktivitas</h3>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 5px; height: 80px;">
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 60%;"></div><div style="font-size: 10px; margin-top: 5px;">Sen</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 80%;"></div><div style="font-size: 10px; margin-top: 5px;">Sel</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 50%;"></div><div style="font-size: 10px; margin-top: 5px;">Rab</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 70%;"></div><div style="font-size: 10px; margin-top: 5px;">Kam</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.6); border-radius: 4px; height: 90%;"></div><div style="font-size: 10px; margin-top: 5px;">Jum</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.8); border-radius: 4px; height: 100%;"></div><div style="font-size: 10px; margin-top: 5px;">Sab</div></div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;"><div style="width: 100%; background: rgba(139, 92, 246, 0.4); border-radius: 4px; height: 40%;"></div><div style="font-size: 10px; margin-top: 5px;">Min</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SMART HOME ==================== -->
+    <div class="app-screen" id="app-smarthome">
+        <div class="app-header" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+            <div class="app-nav">
+                <button class="app-back" onclick="closeApp('smarthome')"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="app-title">Smart Home</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+                <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">💡</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">Lampu Ruang</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Nyala</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(79, 70, 229, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">❄️</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">AC Kamar</div>
+                    <div style="font-size: 12px; opacity: 0.7;">24°C</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">📺</span><div class="toggle" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">Smart TV</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Mati</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3)); border-radius: 20px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;"><span style="font-size: 28px;">🔌</span><div class="toggle active" onclick="this.classList.toggle('active')"></div></div>
+                    <div style="font-weight: 600;">Stop Kontak</div>
+                    <div style="font-size: 12px; opacity: 0.7;">3 aktif</div>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                <h3 style="margin-bottom: 15px;">Rutinitas</h3>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(14, 165, 233, 0.15); border-radius: 12px; margin-bottom: 10px;">
+                    <span style="font-size: 24px;">🌅</span>
+                    <div style="flex: 1;"><div style="font-weight: 600;">Pagi Hari</div><div style="font-size: 11px; opacity: 0.6;">06:00</div></div>
+                    <div class="toggle active"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(251, 146, 60, 0.15); border-radius: 12px;">
+                    <span style="font-size: 24px;">🌙</span>
+                    <div style="flex: 1;"><div style="font-weight: 600;">Tidur</div><div style="font-size: 11px; opacity: 0.6;">23:00</div></div>
+                    <div class="toggle"></div>
                 </div>
             </div>
         </div>
@@ -1108,7 +1238,7 @@
                 <div style="width: 50px; height: 50px; border-radius: 50%; border: 3px solid white;"></div>
                 <button style="width: 70px; height: 70px; border-radius: 50%; background: white; border: none; cursor: pointer;" onclick="capturePhoto()"></button>
                 <div style="width: 50px; height: 50px; border-radius: 10px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
-                    <i class="fa-solid fa-image" style="font-size: 20px;"></i>
+                    <i class="fa-solid fa-heart" style="font-size: 20px;"></i>
                 </div>
             </div>
         </div>
@@ -1326,8 +1456,17 @@ function openApp(appId) {
         'galeri': 'app-galeri',
         'files': 'app-files',
         'youtube': 'app-youtube',
-        'mobilelegends': 'app-mobilelegends',
-        'gamecenter': 'app-gamecenter'
+        'weather': 'app-weather',
+        'recorder': 'app-recorder',
+        'privacy': 'app-privacy',
+        'accessibility': 'app-accessibility',
+        'castscreen': 'app-castscreen',
+        'battery': 'app-battery',
+        'split': 'app-split',
+        'carkey': 'app-carkey',
+        'androidauto': 'app-androidauto',
+        'health': 'app-health',
+        'smarthome': 'app-smarthome'
     };
     const el = document.getElementById(appMap[appId]);
     if (el) {
@@ -1346,8 +1485,17 @@ function closeApp(appId) {
         'galeri': 'app-galeri',
         'files': 'app-files',
         'youtube': 'app-youtube',
-        'mobilelegends': 'app-mobilelegends',
-        'gamecenter': 'app-gamecenter'
+        'weather': 'app-weather',
+        'recorder': 'app-recorder',
+        'privacy': 'app-privacy',
+        'accessibility': 'app-accessibility',
+        'castscreen': 'app-castscreen',
+        'battery': 'app-battery',
+        'split': 'app-split',
+        'carkey': 'app-carkey',
+        'androidauto': 'app-androidauto',
+        'health': 'app-health',
+        'smarthome': 'app-smarthome'
     };
     const el = document.getElementById(appMap[appId]);
     if (el) {
