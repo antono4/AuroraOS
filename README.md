@@ -1,5 +1,8 @@
 # 🌟 AuroraOS - Custom Android ROM
 
+> **Created by Antono**
+
+
 ![AuroraOS Banner](https://img.shields.io/badge/AuroraOS-Android%2017-blue?style=for-the-badge)
 ![API](https://img.shields.io/badge/API-37-green?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
