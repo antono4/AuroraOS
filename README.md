@@ -1,2 +1,26 @@
-Last updated: 2026-08-19 01:02:54 WIB
-Last updated: 2026-08-19 01:16:43 WIB
+# AuroraOS
+
+
+
+## 📋 Overview
+
+This repository contains **32 files** and is built with the following technologies:
+
+HTML
+
+## 🚀 Quick Start
+
+## ✨ Features
+
+- 📝 Auto-generated documentation
+
+## 🛠️ Technologies
+
+HTML
+
+## 📄 License
+
+MIT License
+
+---
+*Last updated: 2026-08-19 01:21:12 WIB*
